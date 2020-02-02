@@ -1,0 +1,104 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-button slot="start">
+      <ion-back-button text="" icon="add"></ion-back-button>
+    </ion-button>
+
+    <ion-searchbar></ion-searchbar>
+    <ion-item
+      lines="none"
+      slot="end"
+      color="secondary"
+      class="ion-no-padding ion-no-margin"
+    >
+      <ion-icon name="share" color="light"></ion-icon>
+    </ion-item>
+    <ion-item
+      lines="none"
+      slot="end"
+      color="secondary"
+      class="ion-no-padding ion-no-margin"
+    >
+      <ion-icon name="cart" color="light"></ion-icon>
+    </ion-item>
+    <ion-item
+      lines="none"
+      slot="end"
+      color="secondary"
+      class="ion-no-padding ion-no-margin"
+    >
+      <ion-icon name="mail" color="light"></ion-icon>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-no-padding ion-no-margin">
+    <ion-row>
+      <ion-slides pager="true">
+        <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+          <ion-fab-button translucent="true">
+            <ion-icon name="heart-empty" color="light"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+        <ion-slide>
+          <ion-card class="ion-no-padding ion-no-margin">
+            <img src="../../assets/sepatu.png" />
+          </ion-card>
+        </ion-slide>
+        <ion-slide>
+          <ion-card class="ion-no-padding ion-no-margin">
+            <img src="../../assets/sepatu.png" />
+          </ion-card>
+        </ion-slide>
+        <ion-slide>
+          <ion-card class="ion-no-padding ion-no-margin">
+            <img src="../../assets/sepatu.png" />
+          </ion-card>
+        </ion-slide>
+      </ion-slides>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row>
+      <h1>Sepatu 1</h1>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6">
+        <h2>Rp.3.000.000</h2>
+      </ion-col>
+      <ion-col size="6">
+        <h2>Rp.3.500.000</h2>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <h3>
+        ini deskripsi ini deskripsi ini deskripsi ini deskripsi ini deskripsi
+        ini deskripsi ini deskripsi ini deskripsi ini deskripsi ini deskripsi
+        ini deskripsi ini deskripsi ini deskripsi ini deskripsi ini deskripsi
+        ini deskripsi ini deskripsi ini deskripsi ini deskripsi ini deskripsi
+        ini deskripsi ini deskripsi ini deskripsi ini deskripsi ini deskripsi
+        ini deskripsi ini deskripsi ini deskripsi ini deskripsi ini deskripsi
+      </h3>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer style="background-color: #2A7882;">
+  <div color="secondary">
+    <ion-grid class="ion-no-padding ion-no-margin">
+      <ion-row >
+        <ion-col size="2" > </ion-col>
+        <ion-col size="5">
+          <ion-button color="warning" shape="block" fill="outline"
+            >Beli</ion-button
+          ></ion-col
+        >
+        <ion-col size="5" >
+          <ion-button color="warning" shape="block">Tambah Ke keranjang</ion-button></ion-col
+        >
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-footer>
