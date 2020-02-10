@@ -1,0 +1,18 @@
+.colorWhite{
+    color: white;
+}
+
+.roundedInput {
+    height: 30px;
+    width: 30px;
+    --border-color: var(--ion-color-medium-shade);
+    --border-radius: 50%;
+    --border-width: 1px;
+    --box-shadow: 2px gray;
+    --highlight-height: 0;
+    --background: #f8f9fa;
+   }
+
+   .iconSize {
+    font-size: 512px;
+  }

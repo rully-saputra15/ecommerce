@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button color="light" defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <strong> Keranjang</strong>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="4">
+          <img src="../../assets/sepatu.png" />
+        </ion-col>
+        <ion-col size="7">
+          <ion-row style="font-size: medium ; color:black;"
+            ><strong>Sepatu 1</strong></ion-row
+          >
+          <ion-row> Rp.2.300.000</ion-row>
+          <ion-row>
+            <ion-col size="1">
+              <ion-icon name="remove" style="color: black;"></ion-icon
+            ></ion-col>
+            <ion-col size="2"> </ion-col>
+            <ion-col size="1">
+              <ion-icon name="add" style="color: black;"></ion-icon
+            ></ion-col>
+            <ion-col size="8"></ion-col>
+          </ion-row>
+        </ion-col>
+
+        <ion-col size="1">
+          <ion-button size="small" class="roundedInput">
+            <ion-icon
+              class="iconSize"
+              name="close"
+              style="color: black;"
+            ></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</ion-content>
+
+<ion-footer style="background-color: #2A7882;">
+  <div color="secondary">
+    <ion-grid>
+      <ion-row>
+        <ion-col class="ion-padding-start " size="8">
+          <ion-row>Total Harga</ion-row>
+          <ion-row
+            ><strong style="color:#FEC002 ;">Rp.2.300.000</strong></ion-row
+          >
+        </ion-col>
+
+        <ion-col size="4">
+          <ion-button class="size_small" color="warning" shape="block"
+            >Beli</ion-button
+          ></ion-col
+        >
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-footer>
