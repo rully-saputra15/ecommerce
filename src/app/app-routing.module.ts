@@ -20,6 +20,22 @@ const routes: Routes = [
     path: 'keranjang',
     loadChildren: () => import('./keranjang/keranjang.module').then( m => m.KeranjangPageModule)
   },
+  {
+    path: 'pembayaran',
+    loadChildren: () => import('./pembayaran/pembayaran.module').then( m => m.PembayaranPageModule)
+  },
+  {
+    path: 'pesan',
+    loadChildren: () => import('./pesan/pesan.module').then( m => m.PesanPageModule)
+  },
+  {
+    path: 'notifikasi',
+    loadChildren: () => import('./notifikasi/notifikasi.module').then( m => m.NotifikasiPageModule)
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+  },
 ];
 
 @NgModule({

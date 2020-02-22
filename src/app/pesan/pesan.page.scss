@@ -1,0 +1,21 @@
+ion-avatar  {     
+    width:100% !important;  
+    height : 100% !important;  
+    max-width: 50px !important;  //any size
+    max-height: 50px !important; //any size 
+    margin: 0px;
+    padding: 0px;
+    }
+
+ion-footer{
+    color: #2A7882;
+}
+
+.roundedInput {
+    --border-color: var(--ion-color-medium-shade);
+    --border-radius: 30px;
+    --border-width: 1px;
+    --box-shadow: 2px gray;
+    --highlight-height: 0;
+    --background: #f8f9fa;
+   }

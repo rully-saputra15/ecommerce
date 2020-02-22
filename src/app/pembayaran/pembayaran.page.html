@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button color="light" defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <strong> Pembayaran</strong>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-card>
+  <ion-item>
+    <strong>Alamat Pengiriman</strong>
+  </ion-item>
+
+  <div class="ion-padding-start padding_1">
+    jl.komplek garuda no 457
+  </div>
+  
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-button  
+    color="warning"
+    fill="outline"
+    size="medium">
+      <strong>Ganti Alamat</strong>
+    </ion-button>
+  </ion-fab>
+</ion-card>
+
+<ion-card>
+  <ion-item>
+    <ion-grid>
+      <ion-row>
+        <strong>Total Harga</strong>
+      </ion-row>
+      <ion-row>
+        <strong style="color:#FEC002 ;">Rp.2.300.000</strong>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+ 
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <strong class="ion-padding-top ion-margin-top ion-margin-end">Pembayaran        </strong>
+    <ion-button color="warning" fill="outline">
+      <ion-select value="03" class="ion-padding-top">
+        <ion-select-option value="01">OVO</ion-select-option>
+        <ion-select-option value="02">Transfer</ion-select-option>
+        <ion-select-option value="03">Cash</ion-select-option>
+
+      </ion-select>
+    </ion-button>
+
+  
+  </ion-fab>
+
+  
+</ion-card>
+<ion-button color="warning" class="ion-margin " expand="block" size="large">
+  <h3><strong>Bayar</strong></h3>
+</ion-button>
+</ion-content>
