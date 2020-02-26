@@ -19,3 +19,10 @@ ion-footer{
     --highlight-height: 0;
     --background: #f8f9fa;
    }
+
+   .vertical-align-content > 
+{
+     display: flex!important;
+     align-content: center!important;
+     align-items: center!important;
+}
