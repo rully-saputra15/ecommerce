@@ -36,6 +36,18 @@ const routes: Routes = [
     path: 'profile',
     loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
   },
+  {
+    path: 'register',
+    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
+  },
+  {
+    path: 'page-confirmation',
+    loadChildren: () => import('./page-confirmation/page-confirmation.module').then( m => m.PageConfirmationPageModule)
+  },
+  {
+    path: 'my-order',
+    loadChildren: () => import('./my-order/my-order.module').then( m => m.MyOrderPageModule)
+  },
 ];
 
 @NgModule({
