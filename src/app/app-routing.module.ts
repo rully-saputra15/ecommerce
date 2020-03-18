@@ -48,6 +48,14 @@ const routes: Routes = [
     path: 'my-order',
     loadChildren: () => import('./my-order/my-order.module').then( m => m.MyOrderPageModule)
   },
+  {
+    path: 'search',
+    loadChildren: () => import('./search/search.module').then( m => m.SearchPageModule)
+  },
+  {
+    path: 'list-view',
+    loadChildren: () => import('./list-view/list-view.module').then( m => m.ListViewPageModule)
+  },
 ];
 
 @NgModule({
