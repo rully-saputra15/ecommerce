@@ -32,7 +32,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngFor="let tmp of barang">
   <ion-grid class="ion-no-padding ion-no-margin">
     <ion-row>
       <ion-slides pager="true">
@@ -60,11 +60,11 @@
     </ion-row>
   </ion-grid>
 
-  <ion-grid>
+  <ion-grid >
     <ion-row>
       <ion-item lines="none">
         <ion-col size="10" class="ion-no-padding">
-          <h3><b>Sepatu Adidas PureBoost Oreo Brand New In Box</b></h3>
+          <h3><b>{{tmp.nama_barang}}</b></h3>
         </ion-col>
         <ion-col size="2" class="ion-no-padding"> </ion-col>
       </ion-item>
@@ -73,11 +73,32 @@
       <ion-col size="12" style="height: fit-content;">
         <ion-item lines="full">
           <h3 style="color: #FEC002;margin:0px">
-            <b>Rp.2.200.000 ~ Rp.2400.000</b>
+            <b>Rp.{{tmp.harga}}</b>
           </h3>
         </ion-item>
       </ion-col>
     </ion-row>
+    <ion-row>
+      <ion-col size="1">
+        <ion-button (click)="addNilai()"class="ion-no-padding ion-no-margin"
+        fill="clear"
+        size="small">
+        <ion-icon name="remove" (click)="minusNilai()"style="color: black;"></ion-icon
+      >
+        </ion-button>
+      </ion-col>
+      <ion-col size="2">
+        {{nilai}}
+      </ion-col>
+      <ion-col size="1">
+        <ion-button (click)="addNilai()"class="ion-no-padding ion-no-margin"
+        fill="clear"
+        size="small">
+        <ion-icon name="add" style="color: black;"></ion-icon
+      >
+        </ion-button>
+        </ion-col>
+        </ion-row>
   </ion-grid>
 
   <ion-grid>
@@ -100,7 +121,7 @@
       <ion-col size="6" style="padding-top: 0px;padding-bottom: 0px;">
         <ion-item lines="none" class="right">
           <h4 class="ion-no-margin" style="color: grey; font-weight:400;">
-            400 Gram
+            {{tmp.berat}} Gram
           </h4>
         </ion-item>
       </ion-col>
@@ -149,7 +170,7 @@
       <ion-col size="6" style="padding-top: 0px;padding-bottom: 0px;">
         <ion-item lines="none" class="right">
           <h4 class="ion-no-margin" style="color: grey; font-weight:400;">
-            Sepatu
+            {{tmp.kategori}}
           </h4>
         </ion-item>
       </ion-col>
@@ -188,16 +209,7 @@
             style="color: grey; font-weight:400; margin-top: 0px; margin-bottom: 0px; font-size: 18px;"
           >
             deskripsi produk:
-            <br />
-            -paasasgasgasgasgasgasgsagas
-            <br />
-            -asgagqwgqwgqgqwgqwgqgqwgq
-            <br />
-            -ngkqkgnkqwfqwdnqwnfqnwfqqgqwg
-            <br />
-            -asgnqngnqwnkfqnwfqnwfnw
-            <br />
-            -asgasjngkqngnqwfnlqwfnkqwnlfklk
+            {{tmp.deskripsi}}
           </p>
         </ion-item>
       </ion-col>
@@ -217,6 +229,7 @@
             color="warning"
             shape="block"
             fill="outline"
+            (click)="loadingKeranjang()"
             >Beli</ion-button
           ></ion-col
         >

@@ -3,7 +3,7 @@
      
     <ion-searchbar></ion-searchbar>
     <ion-item lines="none" slot="end" color="secondary">
-      <ion-icon name="mail"></ion-icon>
+      <ion-icon (click)="keranjang()"name="mail"></ion-icon>
     </ion-item>
     <ion-item lines="none" slot="end" color="secondary">
       <ion-icon name="notifications-outline"></ion-icon>
@@ -88,86 +88,16 @@
     </ion-row>
 
     <ion-row>
-      <ion-col size="6">
+      <ion-col size="6" *ngFor="let tmp of barang" routerLink='/details/{{tmp.id}}'>
         <ion-card class="ion-no-padding ion-no-margin">
           <ion-card-header class="padding_3">
             <img src="../../assets/sepatu.png" />
             <ion-card-subtitle class="ion-text-center">
-              Sepatu Nike
+              {{tmp.nama_barang}}
             </ion-card-subtitle>
           </ion-card-header>
           <ion-card-content class="ion-text-center">
-            Harga : 100.000
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-
-      <ion-col size="6">
-        <ion-card class="ion-no-padding ion-no-margin">
-          <ion-card-header class="padding_3">
-            <img src="../../assets/sepatu.png" />
-            <ion-card-subtitle class="ion-text-center">
-              Sepatu Nike
-            </ion-card-subtitle>
-          </ion-card-header>
-          <ion-card-content class="ion-text-center">
-            Harga : 100.000
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-
-      <ion-col size="6">
-        <ion-card class="ion-no-padding ion-no-margin">
-          <ion-card-header class="padding_3">
-            <img src="../../assets/sepatu.png" />
-            <ion-card-subtitle class="ion-text-center">
-              Sepatu Nike
-            </ion-card-subtitle>
-          </ion-card-header>
-          <ion-card-content class="ion-text-center">
-            Harga : 100.000
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-
-      <ion-col size="6">
-        <ion-card class="ion-no-padding ion-no-margin">
-          <ion-card-header class="padding_3">
-            <img src="../../assets/sepatu.png" />
-            <ion-card-subtitle class="ion-text-center">
-              Sepatu Nike
-            </ion-card-subtitle>
-          </ion-card-header>
-          <ion-card-content class="ion-text-center">
-            Harga : 100.000
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-
-      <ion-col size="6">
-        <ion-card class="ion-no-padding ion-no-margin">
-          <ion-card-header class="padding_3">
-            <img src="../../assets/sepatu.png" />
-            <ion-card-subtitle class="ion-text-center">
-              Sepatu Nike
-            </ion-card-subtitle>
-          </ion-card-header>
-          <ion-card-content class="ion-text-center">
-            Harga : 100.000
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-
-      <ion-col size="6">
-        <ion-card class="ion-no-padding ion-no-margin">
-          <ion-card-header class="padding_3">
-            <img src="../../assets/sepatu.png" />
-            <ion-card-subtitle class="ion-text-center">
-              Sepatu Nike
-            </ion-card-subtitle>
-          </ion-card-header>
-          <ion-card-content class="ion-text-center">
-            Harga : 100.000
+            Harga : {{tmp.harga}}
           </ion-card-content>
         </ion-card>
       </ion-col>
