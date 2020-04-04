@@ -1,3 +1,5 @@
+import { KeranjangService } from './../keranjang.service';
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageConfirmationPage implements OnInit {
 
-  constructor() { }
+  constructor(public router : Router,public keranjangSvc : KeranjangService) { }
 
   ngOnInit() {
   }
-
+  home(){
+    this.keranjangSvc.clearKeranjang();
+    this.router.navigate(['/home']);
+  }
 }

@@ -14,17 +14,9 @@
   </ion-item>
 
   <div class="ion-padding-start padding_1">
-    jl.komplek garuda no 457
+    <ion-input [(ngModel)]="alamat" (ionChange)="ubahAlamat(alamat)"></ion-input>
   </div>
-  
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-button  
-    color="warning"
-    fill="outline"
-    size="medium">
-      <strong>Ganti Alamat</strong>
-    </ion-button>
-  </ion-fab>
+
 </ion-card>
 
 <ion-card>
@@ -34,7 +26,7 @@
         <strong>Total Harga</strong>
       </ion-row>
       <ion-row>
-        <strong style="color:#FEC002 ;">Rp.2.300.000</strong>
+        <strong style="color:#FEC002 ;">Rp.{{totalHarga}}</strong>
       </ion-row>
     </ion-grid>
   </ion-item>
@@ -42,11 +34,8 @@
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <strong class="ion-padding-top ion-margin-top ion-margin-end">Pembayaran        </strong>
     <ion-button color="warning" fill="outline">
-      <ion-select value="03" class="ion-padding-top">
-        <ion-select-option value="01">OVO</ion-select-option>
-        <ion-select-option value="02">Transfer</ion-select-option>
-        <ion-select-option value="03">Cash</ion-select-option>
-
+      <ion-select [(ngModel)]="item" (ionChange)="optionsPembayaran(item)"class="ion-padding-top">
+        <ion-select-option *ngFor="let tmp of options" value="{{tmp}}">{{tmp}}</ion-select-option>
       </ion-select>
     </ion-button>
 
@@ -55,7 +44,7 @@
 
   
 </ion-card>
-<ion-button color="warning" class="ion-margin " expand="block" size="large">
+<ion-button (click)="finish()"color="warning" class="ion-margin " expand="block" size="large">
   <h3><strong>Bayar</strong></h3>
 </ion-button>
 </ion-content>

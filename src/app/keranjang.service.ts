@@ -16,4 +16,21 @@ export class KeranjangService {
   getAllKeranjang(){
     return [...this.keranjang];
   }
+  updateKeranjang(index : number,status : number){
+    if(status == 1){
+      this.keranjang[index].addJumlahBarang();
+    }else{
+      this.keranjang[index].minusJumlahBarang();
+    }
+  }
+  setKeranjangID(index : number,id : number){
+      this.keranjang[index].setIDTransaksi(id);
+  }
+  clearKeranjang(){
+    this.keranjang = [];
+  }
+  hapusKeranjangID(index : number){
+    this.keranjang.splice(index,1);
+    return this.keranjang;
+  }
 }

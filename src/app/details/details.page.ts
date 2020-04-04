@@ -1,5 +1,5 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { Barang } from './../barang.page';
+import { Barang } from '../barang.model';
 import { KeranjangService } from './../keranjang.service';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { Keranjang } from './../keranjang.model';
@@ -44,11 +44,11 @@ export class DetailsPage implements OnInit {
   }
   async loadingKeranjang(){
     const loading = await this.loadingCtrl.create({
-      message : 'Menambah barang ke keranjang!'
+      message : 'Menambah barang ke keranjang!',
+      duration : 1000
     });
     loading.present();
-    this.keranjangSvc.setKeranjang(this.id,this.barang[0]['nama_barang'],this.barang[0]['harga'],this.nilai);
-    loading.dismiss();
+    this.keranjangSvc.setKeranjang(this.id,this.barang[0]['nama_barang'],this.barang[0]['harga_pokok'],this.nilai);
     this.presentToast();
   }
   addNilai(){

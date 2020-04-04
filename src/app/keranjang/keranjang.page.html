@@ -10,7 +10,7 @@
 <ion-content>
   <ion-card>
     <ion-grid>
-      <ion-row *ngFor="let tmp of keranjang">
+      <ion-row *ngFor="let tmp of keranjang; index as i">
         <ion-col size="4">
           <img src="../../assets/sepatu.png" />
         </ion-col>
@@ -21,7 +21,7 @@
           <ion-row> Rp.{{tmp.Harga}}</ion-row>
           <ion-row>
             <ion-col size="1">
-              <ion-button class="ion-no-padding ion-no-margin"
+              <ion-button (click)="minusJumlah(i)"class="ion-no-padding ion-no-margin"
               fill="clear"
               size="small">
               <ion-icon name="remove" style="color: black;"></ion-icon
@@ -32,7 +32,7 @@
               {{tmp.JumlahBarang}}
             </ion-col>
             <ion-col size="1">
-              <ion-button class="ion-no-padding ion-no-margin"
+              <ion-button (click)="addJumlah(i)"class="ion-no-padding ion-no-margin"
               fill="clear"
               size="small">
               <ion-icon name="add" style="color: black;"></ion-icon
@@ -45,7 +45,8 @@
             <ion-col size="1">
               <ion-button class="ion-no-padding ion-no-margin"
               fill="clear"
-              size="small">
+              size="small"
+              (click)="hapusKeranjang(i)">
               <ion-icon name="md-trash" style="color: black;"></ion-icon
                 >
               </ion-button>
@@ -66,13 +67,13 @@
         <ion-col class="ion-padding-start " size="8">
           <ion-row>Total Harga</ion-row>
           <ion-row
-            ><strong style="color:#FEC002 ;">Rp.2.300.000</strong></ion-row
+            ><strong style="color:#FEC002 ;">Rp.{{totalHarga}}</strong></ion-row
           >
         </ion-col>
 
         <ion-col size="4">
-          <ion-button class="size_small" color="warning" shape="block"
-            >Beli</ion-button
+          <ion-button class="size_small" color="warning" shape="block" (click)="pembayaran()"
+            >Checkout</ion-button
           ></ion-col
         >
       </ion-row>
