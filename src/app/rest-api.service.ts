@@ -6,12 +6,14 @@ import { catchError, tap, map, retry } from 'rxjs/operators';
 import { take } from 'rxjs/operators'
 //const apiUrl = "http://localhost/quimtafari/api/product/read_all_barang.php";
 //const apiUrlReadBarangID = "http://localhost/quimtafari/api/product/read_barang.php";
-const apiUrlTransaksi = "http://localhost/quimtafari/api/product/addTransaksi.php";
-const apiUrlDetailTransaksi = "http://localhost/quimtafari/api/product/addDetailTransaksi.php";
+//const apiUrlTransaksi = "http://localhost/quimtafari/api/product/addTransaksi.php";
+//const apiUrlDetailTransaksi = "http://localhost/quimtafari/api/product/addDetailTransaksi.php";
+//const apiUrlLogin = "http://localhost/quimtafari/api/product/login.php";
 const apiUrl = 'https://adminecommerce.000webhostapp.com/api/product/read_all_barang.php';
 const apiUrlReadBarangID = 'https://adminecommerce.000webhostapp.com/api/product/read_barang.php';
-//const apiUrlTransaksi = 'https://adminecommerce.000webhostapp.com/api/product/addTransaksi.php';
-//const apiUrlDetailTransaksi = 'https://adminecommerce.000webhostapp.com/api/product/addDetailTransaksi.php';
+const apiUrlTransaksi = 'https://adminecommerce.000webhostapp.com/api/product/addTransaksi.php';
+const apiUrlDetailTransaksi = 'https://adminecommerce.000webhostapp.com/api/product/addDetailTransaksi.php';
+const apiUrlLogin = "https://adminecommerce.000webhostapp.com/api/product/login.php";
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
@@ -24,13 +26,26 @@ export class RestApiService {
   barang : any = [];
   constructor(private http: HttpClient) { 
   }
-  getAllBarang():Observable<any>{
-    return this.http.get(apiUrl).pipe(
+  getAllBarang(status : any):Observable<any>{
+    return this.http.get(apiUrl+'?status=' + status).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }
-  getBarang(id : any):Observable<any>{
+  /*getBarang(id : any):Observable<any>{
     return this.http.get(apiUrlReadBarangID + '?id=' + id).pipe(
+      map(this.extractData),
+      catchError(this.handleError));
+  }*/
+  getBarang(id : any){
+    return{
+      ...this.barang.find(barang => {
+        return barang.id !== id
+      })
+    };
+  }
+  login(data : any):Observable<any>{
+    return this.http.post(apiUrlLogin,JSON.stringify(data)).pipe(
+      retry(2),
       map(this.extractData),
       catchError(this.handleError));
   }

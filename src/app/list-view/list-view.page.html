@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button color="light" defaultHref="home"></ion-back-button>
     </ion-buttons>
-    <ion-searchbar></ion-searchbar>
+    <ion-searchbar (ionChange)="search($event)"></ion-searchbar>
     <ion-item lines="none" slot="end" color="secondary">
       <ion-icon name="notifications-outline"></ion-icon>
     </ion-item>
@@ -14,45 +14,36 @@
 </ion-header>
 
 <ion-content>
+  <ion-list>
   <ion-item *ngFor="let tmp of barang; index as i" lines="full">
-    <ion-grid>
-      <ion-row>
+    <ion-label>
+      <h2>{{tmp.nama_barang}}</h2>
+      <p>Harga : {{tmp.harga_pokok}}/{{tmp.satuan}}</p>
+  </ion-label>
+      <!--<ion-row>
         <ion-col class="ion-float-left" size="9">
-          <h5 class="ion-margin-bottom">{{tmp.nama_barang}}</h5>
-          <h6 class="ion-margin-bottom">Harga : {{tmp.harga_pokok}}/{{tmp.satuan}}</h6>
+          <h5 class="ion-margin-bottom"></h5>
+          <h6 class="ion-margin-bottom"></h6>
         </ion-col>
-
-        <ion-col size="1">
+        <ion-col size="4">-->
           <ion-button
             class="ion-no-padding ion-no-margin"
             fill="clear"
-            size="small"
-          >
-            <ion-icon name="remove" style="color: black; margin-top: 15px" ></ion-icon>
-          </ion-button>
-        </ion-col>
-
-        <ion-col size="1">
-          <ion-input  style="border: 1px;"> </ion-input>
-        </ion-col>
-
-        <ion-col size="1">
-          <ion-button
-            class="ion-no-padding ion-no-margin"
-            fill="clear"
-            size="small"
+            slot="end"
+            size="medium"
             (click)="tambahKeranjang(i)"
           >
             <ion-icon name="add" style="color: black;margin-top: 15px "></ion-icon>
           </ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+        <!--</ion-col>
+      </ion-row>-->
+    
   </ion-item>
-  <ion-infinite-scroll (ionInfinite)="loadData($event)">
+  </ion-list>
+  <!--<ion-infinite-scroll (ionInfinite)="loadData($event)">
     <ion-infinite-scroll-content
     loadingSpinner="circles"
     loadingText="Loading more data..." >
   </ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+  </ion-infinite-scroll>-->
 </ion-content>

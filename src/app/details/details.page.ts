@@ -13,6 +13,7 @@ import { RestApiService } from '../rest-api.service';
 })
 export class DetailsPage implements OnInit {
   barang : any;
+  barangLoaded : any;
   nilai : number = 1;
   id : number ;
   constructor(public keranjangSvc : KeranjangService,public loadingCtrl : LoadingController,public restApi : RestApiService, public route : ActivatedRoute,public router : Router
@@ -27,13 +28,16 @@ export class DetailsPage implements OnInit {
       message : 'Loading!'
     });
     await loading.present();
-    await this.restApi.getBarang(this.route.snapshot.paramMap.get('id'))
+    this.barang = this.restApi.getBarang(this.id);
+    console.log(this.barang);
+    loading.dismiss();
+    /*await this.restApi.getBarang(this.route.snapshot.paramMap.get('id'))
     .subscribe(res => {
       this.barang = res;
       loading.dismiss();
     }, err => {
       loading.dismiss();
-    });
+    });*/
   }
   async presentToast(){
     const toast = await this.toastCtrl.create({
@@ -56,5 +60,8 @@ export class DetailsPage implements OnInit {
   }
   minusNilai(){
     this.nilai = this.nilai - 1;
+  }
+  keranjang(){
+    this.router.navigate(['./keranjang']);
   }
 }

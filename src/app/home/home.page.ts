@@ -1,3 +1,4 @@
+import { UserService } from './../user.service';
 import { Router } from '@angular/router';
 import { LoadingController, IonInfiniteScroll } from '@ionic/angular';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -15,7 +16,9 @@ export class HomePage implements OnInit{
   barangLoaded : any = [];
   barang : any = [];
   item : any = '';
+  status : number ;
   i : number = 25;
+  visited : number ;
   merk = [
     '- A -',
     'CRUN',
@@ -24,11 +27,21 @@ export class HomePage implements OnInit{
     'CKD',
     'YASUHO'
   ];
-  constructor(public restApi : RestApiService,public loadingCtrl : LoadingController, public router : Router) {}
+  constructor(public restApi : RestApiService,public loadingCtrl : LoadingController, public router : Router,public userSvc : UserService) {}
 
   ngOnInit(){
+    this.status = this.userSvc.getDataStatus();
     if(this.barangLoaded.length <= 0){
       this.presentLoading();
+    }
+  }
+  ionViewWillEnter(){
+    this.status = this.userSvc.getDataStatus();
+    if(this. visited == 1){
+      if(this.barangLoaded.length <= 0){
+        this.presentLoading();
+        this.visited = 0;
+      }
     }
   }
   async presentLoading(){
@@ -36,15 +49,22 @@ export class HomePage implements OnInit{
       message : 'Loading!'
     });
     await loading.present();
-    await this.restApi.getAllBarang()
-    .subscribe(res => {
-      this.barangLoaded = res;
-      this.barang = this.barangLoaded.slice(0,this.i);
-      this.restApi.setAllBarang(this.barangLoaded);
+    if(this.status == null){
       loading.dismiss();
-    }, err => {
-      loading.dismiss();
-    });
+      this.visited = 1;
+      this.router.navigate(['./login']);
+    }else{
+      await this.restApi.getAllBarang(this.status)
+      .subscribe(res => {
+        this.barangLoaded = res;
+        this.barang = this.barangLoaded.slice(0,this.i);
+        this.restApi.setAllBarang(this.barangLoaded);
+        loading.dismiss();
+      }, err => {
+        loading.dismiss();
+      });
+    }
+
   }
   keranjang(){
     this.router.navigate(['./keranjang']);
