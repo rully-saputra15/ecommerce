@@ -28,16 +28,16 @@ export class DetailsPage implements OnInit {
       message : 'Loading!'
     });
     await loading.present();
-    this.barang = this.restApi.getBarang(this.id);
+    /*this.barang = this.restApi.getBarang(this.id);
     console.log(this.barang);
-    loading.dismiss();
-    /*await this.restApi.getBarang(this.route.snapshot.paramMap.get('id'))
+    loading.dismiss();*/
+    await this.restApi.getBarang(this.route.snapshot.paramMap.get('id'))
     .subscribe(res => {
       this.barang = res;
       loading.dismiss();
     }, err => {
       loading.dismiss();
-    });*/
+    });
   }
   async presentToast(){
     const toast = await this.toastCtrl.create({
@@ -56,10 +56,20 @@ export class DetailsPage implements OnInit {
     this.presentToast();
   }
   addNilai(){
-    this.nilai = this.nilai + 1;
+    if(this.nilai === +this.barang[0]['stok_barang']){
+      this.nilai = +this.barang[0]['stok_barang'];
+    }else{
+      this.nilai = this.nilai + 1;
+    }
+    
   }
   minusNilai(){
-    this.nilai = this.nilai - 1;
+    if(this.nilai < 2){
+      this.nilai = 1;
+    }else{
+      this.nilai = this.nilai - 1;
+    }
+
   }
   keranjang(){
     this.router.navigate(['./keranjang']);

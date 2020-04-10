@@ -9,6 +9,7 @@ import { take } from 'rxjs/operators'
 //const apiUrlTransaksi = "http://localhost/quimtafari/api/product/addTransaksi.php";
 //const apiUrlDetailTransaksi = "http://localhost/quimtafari/api/product/addDetailTransaksi.php";
 //const apiUrlLogin = "http://localhost/quimtafari/api/product/login.php";
+const apiUrlRegister = "http://localhost/quimtafari/api/product/register.php";
 const apiUrl = 'https://adminecommerce.000webhostapp.com/api/product/read_all_barang.php';
 const apiUrlReadBarangID = 'https://adminecommerce.000webhostapp.com/api/product/read_barang.php';
 const apiUrlTransaksi = 'https://adminecommerce.000webhostapp.com/api/product/addTransaksi.php';
@@ -31,18 +32,18 @@ export class RestApiService {
       map(this.extractData),
       catchError(this.handleError));
   }
-  /*getBarang(id : any):Observable<any>{
+  getBarang(id : any):Observable<any>{
     return this.http.get(apiUrlReadBarangID + '?id=' + id).pipe(
       map(this.extractData),
       catchError(this.handleError));
-  }*/
-  getBarang(id : any){
+  }
+  /*getBarang(id : any){
     return{
       ...this.barang.find(barang => {
         return barang.id !== id
       })
     };
-  }
+  }*/
   login(data : any):Observable<any>{
     return this.http.post(apiUrlLogin,JSON.stringify(data)).pipe(
       retry(2),
@@ -57,6 +58,14 @@ export class RestApiService {
   }
   postTransaksi(data : any):Observable<any>{
     return this.http.post(apiUrlTransaksi,JSON.stringify(data))
+    .pipe(
+      retry(2),
+      map(this.extractData),
+      catchError(this.handleError)
+    );
+  }
+  postRegisterUser(data : any):Observable<any>{
+    return this.http.post(apiUrlRegister,JSON.stringify(data))
     .pipe(
       retry(2),
       map(this.extractData),

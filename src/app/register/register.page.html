@@ -1,4 +1,5 @@
 <ion-content color="secondary">
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
   <ion-grid>
     <ion-row class="section_1 ion-padding">
       <ion-col size="12" class="ion-text-center">
@@ -6,46 +7,94 @@
       </ion-col>
       <br>
 
-          <ion-col size="12">
+      <ion-col size="12">
+        <ion-item class="roundedInput">
+          <ion-label position="floating">Nama</ion-label>
+          <ion-input type="text"
+          ngModel
+          name="nama"
+          required
+          nama
+          #namaCtrl></ion-input>
+        </ion-item>
+      </ion-col>    
+      <ion-col size="12">
+        <ion-item class="roundedInput">
+          <ion-label position="floating">Email</ion-label>
+          <ion-input type="email"
+          ngModel
+          name="email"
+          required
+          email
+          #emailCtrl></ion-input>
+        </ion-item>
+      </ion-col>    
+      <!--<ion-col size="12">
             <ion-item class="roundedInput">
               <ion-label position="floating">Username</ion-label>
-              <ion-input type="text"></ion-input>
+              <ion-input type="text"
+              ngModel
+              name="username"
+              required
+              username
+              #usernameCtrl
+              ></ion-input>
             </ion-item>
-          </ion-col>
+          </ion-col>-->
           <ion-col size="12">
             <ion-item class="roundedInput">
               <ion-label position="floating">Password</ion-label>
-              <ion-input type="password"></ion-input>
+              <ion-input type="password"
+              ngModel
+              name="password"
+              required
+              password
+              #passwordCtrl></ion-input>
             </ion-item>
           </ion-col>
-          <ion-col size="12">
-            <ion-item class="roundedInput">
-              <ion-label position="floating">Email</ion-label>
-              <ion-input type="email"></ion-input>
-            </ion-item>
-          </ion-col>
+
           <ion-col size="12">
             <ion-item class="roundedInput">
               <ion-label position="floating">Alamat</ion-label>
-              <ion-input type="text" ></ion-input>
+              <ion-input type="text"
+              ngModel
+              name="alamat"
+              required
+              alamat
+              #alamatCtrl></ion-input>
             </ion-item>
           </ion-col>
           <ion-col size="12">
             <ion-item class="roundedInput">
               <ion-label position="floating">No Handphone</ion-label>
-              <ion-input type="numeric" ></ion-input>
+              <ion-input type="numeric"
+              ngModel
+              name="handphone"
+              required
+              handphone
+              #handphoneCtrl></ion-input>
             </ion-item>
           </ion-col>
           <ion-col size="12">
             <ion-item class="roundedInput">
               <ion-label position="floating">Provinsi</ion-label>
-              <ion-input type="text" ></ion-input>
+              <ion-input type="text"
+              ngModel
+              name="provinsi"
+              required
+              provinsi
+              #provinsiCtrl></ion-input>
             </ion-item>
           </ion-col>
           <ion-col size="12">
             <ion-item class="roundedInput">
               <ion-label position="floating">Kota</ion-label>
-              <ion-input type="text" ></ion-input>
+              <ion-input type="text"
+              ngModel
+              name="kota"
+              required
+              kota
+              #kotaCtrl></ion-input>
             </ion-item>
           </ion-col>
       
@@ -60,11 +109,12 @@
         color="warning"
         fill="solid"
         size="large"
+        type="submit"
         shape="round">
         Sign Up
         </ion-button>
       </ion-col>
- 
+    
       <ion-col size="12" class="ion-justify-content-center" style="text-align: center;">
         already have account?
          <ion-button
@@ -77,4 +127,5 @@
 
     </ion-row>
   </ion-grid>
+</form>
 </ion-content>
