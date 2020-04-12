@@ -28,7 +28,7 @@ export class LoginPage implements OnInit {
     await this.restApi.login(data)
     .subscribe(res => {
       if(res[0]['message'] === 'success'){
-        this.user.setDataUser(res[0]['nama'],res[0]['alamat'],res[0]['status']);
+        this.user.setDataUser(res[0]['id'],res[0]['nama'],res[0]['alamat'],res[0]['status']);
         loading.dismiss();
         this.router.navigate(['./home']);
       }

@@ -9,12 +9,15 @@ import { take } from 'rxjs/operators'
 //const apiUrlTransaksi = "http://localhost/quimtafari/api/product/addTransaksi.php";
 //const apiUrlDetailTransaksi = "http://localhost/quimtafari/api/product/addDetailTransaksi.php";
 //const apiUrlLogin = "http://localhost/quimtafari/api/product/login.php";
-const apiUrlRegister = "http://localhost/quimtafari/api/product/register.php";
+//const apiUrlReadTransaksi = "http://localhost/quimtafari/api/product/readAllTransaksi.php";
+//const apiUrlRegister = "http://localhost/quimtafari/api/product/register.php";
 const apiUrl = 'https://adminecommerce.000webhostapp.com/api/product/read_all_barang.php';
 const apiUrlReadBarangID = 'https://adminecommerce.000webhostapp.com/api/product/read_barang.php';
 const apiUrlTransaksi = 'https://adminecommerce.000webhostapp.com/api/product/addTransaksi.php';
 const apiUrlDetailTransaksi = 'https://adminecommerce.000webhostapp.com/api/product/addDetailTransaksi.php';
 const apiUrlLogin = "https://adminecommerce.000webhostapp.com/api/product/login.php";
+const apiUrlRegister = "https://adminecommerce.000webhostapp.com/api/product/register.php";
+const apiUrlReadTransaksi = "https://adminecommerce.000webhostapp.com/api/product/readAllTransaksi.php";
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
@@ -74,6 +77,14 @@ export class RestApiService {
   }
   postDetailTransaksi(data : any):Observable<any>{
     return this.http.post(apiUrlDetailTransaksi,JSON.stringify(data))
+    .pipe(
+      retry(2),
+      map(this.extractData),
+      catchError(this.handleError)
+    );
+  }
+  getAllTransaksi(data : any):Observable<any>{
+    return this.http.post(apiUrlReadTransaksi,JSON.stringify(data))
     .pipe(
       retry(2),
       map(this.extractData),

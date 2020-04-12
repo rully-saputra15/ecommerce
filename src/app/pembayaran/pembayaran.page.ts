@@ -1,3 +1,4 @@
+import { UserService } from './../user.service';
 import { Router } from '@angular/router';
 import { RestApiService } from './../rest-api.service';
 import { LoadingController, ToastController } from '@ionic/angular';
@@ -21,7 +22,7 @@ export class PembayaranPage implements OnInit {
     'Transfer'
   ]
   constructor(public keranjangSvc : KeranjangService,public loadingCtrl : LoadingController,
-    public restApi : RestApiService,public toastCtrl : ToastController,public router : Router) { }
+    public restApi : RestApiService,public toastCtrl : ToastController,public router : Router,public userSvc : UserService) { }
 
   ngOnInit() {
     this.presentLoading();
@@ -41,10 +42,11 @@ export class PembayaranPage implements OnInit {
   }
   finish(){
     let data = {};
-    data['IDUser'] = 1;
+    data['IDUser'] = this.userSvc.getDataID();
     data['JenisPembayaran'] = this.item;
     data['TotalHarga'] = this.totalHarga;
     this.presentInsertTransaksi(data);
+    console.log(data['IDUser']);
   }
   async presentInsertTransaksi(data : any){
     var i ;

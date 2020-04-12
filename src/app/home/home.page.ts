@@ -99,4 +99,7 @@ export class HomePage implements OnInit{
       }
     },500);
   }
+  myOrder(){
+    this.router.navigate(['./my-order']);
+  }
 }
