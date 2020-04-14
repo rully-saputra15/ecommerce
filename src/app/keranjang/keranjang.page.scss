@@ -16,3 +16,10 @@
    .iconSize {
     font-size: 512px;
   }
+
+.center-any-object {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    vertical-align: center;
+    }

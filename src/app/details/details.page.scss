@@ -15,5 +15,13 @@ h1{
 }
 
 hr{
-    color: black;
+    color: rgb(69, 60, 60);
 }
+
+
+.center-any-object {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    vertical-align: center;
+    }

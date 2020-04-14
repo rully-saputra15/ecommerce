@@ -87,12 +87,12 @@
       <ion-col size="6" *ngFor="let tmp of barang" routerLink='/details/{{tmp.id}}'>
         <ion-card class="ion-no-padding ion-no-margin">
           <ion-card-header class="padding_3">
-            <img src="../../assets/sepatu.png" />
+            <img style="padding-bottom: 8px;" src="../../assets/sepatu.png" />
             <ion-card-subtitle class="ion-text-center">
-              {{tmp.nama_barang}}
+             <strong style="font-size: medium;">{{tmp.nama_barang}}</strong> 
             </ion-card-subtitle>
           </ion-card-header>
-          <ion-card-content class="ion-text-center">
+          <ion-card-content style="padding-top: 0px;" class="ion-text-center">
             Harga : {{tmp.harga_pokok}} / {{tmp.satuan}}
           </ion-card-content>
         </ion-card>
@@ -107,8 +107,8 @@
   </ion-infinite-scroll>
 </ion-content>
 
-<ion-toolbar class="bar">
-  <ion-tabs>
+<ion-toolbar>
+  <ion-tabs >
     <ion-tab-bar slot="bottom" color="secondary">
       <ion-tab-button (click)="keranjang()">
         <ion-label>Keranjang</ion-label>
