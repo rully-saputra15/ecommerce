@@ -1,3 +1,4 @@
+import { UserService } from './../user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Barang } from '../barang.model';
 import { KeranjangService } from './../keranjang.service';
@@ -17,7 +18,7 @@ export class DetailsPage implements OnInit {
   nilai : number = 1;
   id : number ;
   constructor(public keranjangSvc : KeranjangService,public loadingCtrl : LoadingController,public restApi : RestApiService, public route : ActivatedRoute,public router : Router
-    ,public toastCtrl : ToastController) { }
+    ,public toastCtrl : ToastController,public userSvc : UserService) { }
 
   ngOnInit() {
     this.id = +this.route.snapshot.paramMap.get('id');
@@ -31,7 +32,11 @@ export class DetailsPage implements OnInit {
     /*this.barang = this.restApi.getBarang(this.id);
     console.log(this.barang);
     loading.dismiss();*/
-    await this.restApi.getBarang(this.route.snapshot.paramMap.get('id'))
+    let data = {};
+    data['id'] = this.route.snapshot.paramMap.get('id');
+    data['status'] = this.userSvc.getDataStatus();
+    console.log(data);
+    await this.restApi.getBarang(data)
     .subscribe(res => {
       this.barang = res;
       loading.dismiss();

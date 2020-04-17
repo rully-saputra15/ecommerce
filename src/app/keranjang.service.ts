@@ -10,8 +10,17 @@ export class KeranjangService {
   private transaksi : Transaksi[] = [];
   constructor() { }
   setKeranjang(IDBarang : number, NamaBarang : string, Harga : number , JumlahBarang : number){
-    const tmp = new Keranjang(IDBarang,NamaBarang,Harga,JumlahBarang);
-    this.keranjang.push(tmp);
+    let status = 0;
+    for(let i = 0 ; i < this.keranjang.length ; i++){
+      if(this.keranjang[i].IDBarang === IDBarang){
+        this.updateKeranjang(i,1);
+        status = 1;
+      }
+    }
+    if(status == 0){
+      const tmp = new Keranjang(IDBarang,NamaBarang,Harga,JumlahBarang);
+      this.keranjang.push(tmp);
+    }
   }
   getAllKeranjang(){
     return [...this.keranjang];

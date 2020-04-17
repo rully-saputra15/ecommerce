@@ -4,13 +4,13 @@ import { Observable, of, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap, map, retry } from 'rxjs/operators';
 import { take } from 'rxjs/operators'
-//const apiUrl = "http://localhost/quimtafari/api/product/read_all_barang.php";
-//const apiUrlReadBarangID = "http://localhost/quimtafari/api/product/read_barang.php";
-//const apiUrlTransaksi = "http://localhost/quimtafari/api/product/addTransaksi.php";
-//const apiUrlDetailTransaksi = "http://localhost/quimtafari/api/product/addDetailTransaksi.php";
-//const apiUrlLogin = "http://localhost/quimtafari/api/product/login.php";
-//const apiUrlReadTransaksi = "http://localhost/quimtafari/api/product/readAllTransaksi.php";
-//const apiUrlRegister = "http://localhost/quimtafari/api/product/register.php";
+/*const apiUrl = "http://localhost/quimtafari/api/product/read_all_barang.php";
+const apiUrlReadBarangID = "http://localhost/quimtafari/api/product/read_barang.php";
+const apiUrlTransaksi = "http://localhost/quimtafari/api/product/addTransaksi.php";
+const apiUrlDetailTransaksi = "http://localhost/quimtafari/api/product/addDetailTransaksi.php";
+const apiUrlLogin = "http://localhost/quimtafari/api/product/login.php";
+const apiUrlReadTransaksi = "http://localhost/quimtafari/api/product/readAllTransaksi.php";
+const apiUrlRegister = "http://localhost/quimtafari/api/product/register.php";*/
 const apiUrl = 'https://adminecommerce.000webhostapp.com/api/product/read_all_barang.php';
 const apiUrlReadBarangID = 'https://adminecommerce.000webhostapp.com/api/product/read_barang.php';
 const apiUrlTransaksi = 'https://adminecommerce.000webhostapp.com/api/product/addTransaksi.php';
@@ -35,8 +35,8 @@ export class RestApiService {
       map(this.extractData),
       catchError(this.handleError));
   }
-  getBarang(id : any):Observable<any>{
-    return this.http.get(apiUrlReadBarangID + '?id=' + id).pipe(
+  getBarang(data : any):Observable<any>{
+    return this.http.post(apiUrlReadBarangID,JSON.stringify(data)).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }
