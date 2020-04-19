@@ -109,6 +109,8 @@
     <ion-tab-bar slot="bottom" color="secondary">
       <ion-tab-button (click)="keranjang()">
         <ion-label>Keranjang</ion-label>
+        
+        <ion-badge color="danger">{{jumlah_keranjang}}</ion-badge>
         <ion-icon name="cart" color="light"></ion-icon>
       </ion-tab-button>
       <ion-tab-button>

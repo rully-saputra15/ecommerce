@@ -11,6 +11,7 @@ const apiUrlDetailTransaksi = "http://localhost/quimtafari/api/product/addDetail
 const apiUrlLogin = "http://localhost/quimtafari/api/product/login.php";
 const apiUrlReadTransaksi = "http://localhost/quimtafari/api/product/readAllTransaksi.php";
 const apiUrlRegister = "http://localhost/quimtafari/api/product/register.php";*/
+
 const apiUrl = 'https://adminecommerce.000webhostapp.com/api/product/read_all_barang.php';
 const apiUrlReadBarangID = 'https://adminecommerce.000webhostapp.com/api/product/read_barang.php';
 const apiUrlTransaksi = 'https://adminecommerce.000webhostapp.com/api/product/addTransaksi.php';
@@ -30,8 +31,8 @@ export class RestApiService {
   barang : any = [];
   constructor(private http: HttpClient) { 
   }
-  getAllBarang(status : any):Observable<any>{
-    return this.http.get(apiUrl+'?status=' + status).pipe(
+  getAllBarang(data : any):Observable<any>{
+    return this.http.post(apiUrl,JSON.stringify(data)).pipe(
       map(this.extractData),
       catchError(this.handleError));
   }

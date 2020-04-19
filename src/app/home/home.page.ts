@@ -1,3 +1,4 @@
+import { KeranjangService } from './../keranjang.service';
 import { UserService } from './../user.service';
 import { Router } from '@angular/router';
 import { LoadingController, IonInfiniteScroll } from '@ionic/angular';
@@ -13,6 +14,7 @@ import { empty } from 'rxjs';
 export class HomePage implements OnInit{
   //@ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
   nilai : any;
+  jumlah_keranjang : number;
   barangLoaded : any = [];
   barang : any = [];
   item : any = '';
@@ -27,17 +29,19 @@ export class HomePage implements OnInit{
     'CKD',
     'YASUHO'
   ];
-  constructor(public restApi : RestApiService,public loadingCtrl : LoadingController, public router : Router,public userSvc : UserService) {}
+  data = {};
+  constructor(public restApi : RestApiService,public loadingCtrl : LoadingController, public router : Router,public userSvc : UserService,public keranjangSvc : KeranjangService) {}
 
   ngOnInit(){
-    this.status = this.userSvc.getDataStatus();
+    this.data['status'] = this.userSvc.getDataStatus();
+    this.jumlah_keranjang = this.keranjangSvc.countKeranjang();
     if(this.barangLoaded.length <= 0){
       this.presentLoading();
     }
   }
   ionViewWillEnter(){
-    this.status = this.userSvc.getDataStatus();
-    if(this. visited == 1){
+    this.jumlah_keranjang = this.keranjangSvc.countKeranjang();
+    if(this.visited == 1){
       if(this.barangLoaded.length <= 0){
         this.presentLoading();
         this.visited = 0;
@@ -49,14 +53,15 @@ export class HomePage implements OnInit{
       message : 'Loading!'
     });
     await loading.present();
-    if(this.status == null){
+    if(this.data['status'] == null){
       loading.dismiss();
       this.visited = 1;
       this.router.navigate(['./login']);
     }else{
-      await this.restApi.getAllBarang(this.status)
+      await this.restApi.getAllBarang(this.data)
       .subscribe(res => {
         this.barangLoaded = res;
+        console.log(this.barangLoaded);
         this.barang = this.barangLoaded.slice(0,this.i);
         this.restApi.setAllBarang(this.barangLoaded);
         loading.dismiss();

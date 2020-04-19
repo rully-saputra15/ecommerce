@@ -22,6 +22,9 @@ export class KeranjangService {
       this.keranjang.push(tmp);
     }
   }
+  countKeranjang(){
+    return this.keranjang.length;
+  }
   getAllKeranjang(){
     return [...this.keranjang];
   }
