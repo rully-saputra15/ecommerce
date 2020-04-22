@@ -1,50 +1,35 @@
 {
   "project_info": {
-    "project_number": "313874928365",
-    "firebase_url": "https://bazaar-dki2.firebaseio.com",
-    "project_id": "bazaar-dki2",
-    "storage_bucket": "bazaar-dki2.appspot.com"
+    "project_number": "1025189189259",
+    "firebase_url": "https://ecommerce-57e6c.firebaseio.com",
+    "project_id": "ecommerce-57e6c",
+    "storage_bucket": "ecommerce-57e6c.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:313874928365:android:c33dca1ab03f9a5e",
+        "mobilesdk_app_id": "1:1025189189259:android:db7e4369c269ff6ccee68e",
         "android_client_info": {
-          "package_name": "gm.dki2.com"
+          "package_name": "com.shan"
         }
       },
       "oauth_client": [
         {
-          "client_id": "313874928365-j3ibi5ri6mckipabgnhspdmp9itl3qpi.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "gm.dki2.com",
-            "certificate_hash": "7c00efb986b374876f769bea39e45820363dcec4"
-          }
-        },
-        {
-          "client_id": "313874928365-gr2g5j4bc8f8a3ak87qnd5k9uldbahq6.apps.googleusercontent.com",
+          "client_id": "1025189189259-sm5ndm0qv5dg9nsqk0p562vp8fvh2q0e.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCje8vR04qVCOGTdi5W1xuGTLg1Ms_5EOs"
+          "current_key": "AIzaSyB7aEfZN_SztkH9ZEYpOwUxrGDZjQIWVmw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "313874928365-gr2g5j4bc8f8a3ak87qnd5k9uldbahq6.apps.googleusercontent.com",
+              "client_id": "1025189189259-sm5ndm0qv5dg9nsqk0p562vp8fvh2q0e.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "313874928365-4aicqeo0lm2oblu9nt1ipsirkk16c1ah.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.bazaar"
-              }
             }
           ]
         }

@@ -1,11 +1,11 @@
 import { KeranjangService } from './../keranjang.service';
 import { UserService } from './../user.service';
 import { Router } from '@angular/router';
-import { LoadingController, IonInfiniteScroll } from '@ionic/angular';
+import { LoadingController, IonInfiniteScroll, AlertController, ToastController } from '@ionic/angular';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { RestApiService } from '../rest-api.service';
 import { empty } from 'rxjs';
-
+import { Storage } from '@ionic/storage';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -30,11 +30,15 @@ export class HomePage implements OnInit{
     'YASUHO'
   ];
   data = {};
-  constructor(public restApi : RestApiService,public loadingCtrl : LoadingController, public router : Router,public userSvc : UserService,public keranjangSvc : KeranjangService) {}
+  constructor(public restApi : RestApiService,public loadingCtrl : LoadingController, public router : Router,
+    public userSvc : UserService,public keranjangSvc : KeranjangService,public storage : Storage,public alertCtrl : AlertController,
+    public toastCtrl : ToastController) {}
 
   ngOnInit(){
-    this.data['status'] = this.userSvc.getDataStatus();
     this.jumlah_keranjang = this.keranjangSvc.countKeranjang();
+    this.storage.get('status').then((val) => {
+      this.data['status'] = val;
+    });
     if(this.barangLoaded.length <= 0){
       this.presentLoading();
     }
@@ -47,6 +51,29 @@ export class HomePage implements OnInit{
         this.visited = 0;
       }
     }
+  }
+  async logout(){
+    const alert = await this.alertCtrl.create({
+      header: 'Logout',
+      message : 'Anda yakin untuk keluar dari akun?',
+      buttons:[
+        {
+          text:'Tidak',
+          role:'cancel'
+        },
+        {
+        text:'Ya',
+        handler:()=>{
+          this.storage.clear()
+          .then(
+            data => this.router.navigate(['./login']),
+            error => this.errorLogout()
+          );
+        }
+        }
+      ]
+    });
+    alert.present();
   }
   async presentLoading(){
     const loading = await this.loadingCtrl.create({
@@ -61,7 +88,6 @@ export class HomePage implements OnInit{
       await this.restApi.getAllBarang(this.data)
       .subscribe(res => {
         this.barangLoaded = res;
-        console.log(this.barangLoaded);
         this.barang = this.barangLoaded.slice(0,this.i);
         this.restApi.setAllBarang(this.barangLoaded);
         loading.dismiss();
@@ -106,5 +132,12 @@ export class HomePage implements OnInit{
   }
   myOrder(){
     this.router.navigate(['./my-order']);
+  }
+  async errorLogout(){
+    const toast = await this.toastCtrl.create({
+      message:'Gagal logout!',
+      duration:1000
+    });
+    toast.present();
   }
 }

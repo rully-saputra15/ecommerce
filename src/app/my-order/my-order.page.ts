@@ -1,3 +1,4 @@
+import { Storage } from '@ionic/storage';
 import { UserService } from './../user.service';
 import { RestApiService } from './../rest-api.service';
 import { LoadingController, ToastController } from '@ionic/angular';
@@ -10,13 +11,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyOrderPage implements OnInit {
   transaksi : any = [];
-  constructor(public loadingCtrl : LoadingController,public restApi : RestApiService,public userSvc : UserService,public toastCtrl : ToastController) { }
+  constructor(public loadingCtrl : LoadingController,public restApi : RestApiService,public userSvc : UserService,
+    public toastCtrl : ToastController,public storage : Storage) { }
 
   ngOnInit() {
-    let data = {}
-    data['id'] = this.userSvc.getDataID();
-    //console.log(data);
-    this.presentLoading(data);
+    let data = {};
+    this.storage.get('id').then((val)=>{
+      data['id'] = val;
+      this.presentLoading(data);
+    })
   }
   async presentLoading(data){
     const loading = await this.loadingCtrl.create({
@@ -25,7 +28,6 @@ export class MyOrderPage implements OnInit {
     loading.present();
     await this.restApi.getAllTransaksi(data)
     .subscribe(res=>{
-      console.log(res);
       if(res['message'] == 'Transaksi kosong'){
         this.presentToast();
         loading.dismiss();
@@ -38,7 +40,6 @@ export class MyOrderPage implements OnInit {
           }else{
             this.transaksi[i]['status'] = true;
           }
-          console.log(this.transaksi[i]['status']);
         }
       }
       loading.dismiss();

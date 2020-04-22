@@ -48,15 +48,21 @@ export class RegisterPage implements OnInit {
     const loading = await this.loadingCtrl.create({
       message: 'Proses mendaftar akun!'
     });
+    loading.present();
     await this.restApi.postRegisterUser(data)
     .subscribe(res => {
+      console.log(res);
       if(res['message'] == 'success!'){
         this.presentToast(1);
+        loading.dismiss();
         this.router.navigate(['./login']);
       }else{
-        loading.dismiss(0);
+        this.presentToast(0);
+        loading.dismiss();
       }
     },err =>{
+      console.log(err);
+      this.presentToast(0);
       loading.dismiss();
     });
   }
@@ -64,13 +70,13 @@ export class RegisterPage implements OnInit {
     if(nil === 0){
       const toast = this.toastCtrl.create({
         message:'Akun anda gagal terdaftar!',
-        duration:500
+        duration:1000
       });
       (await toast).present();
     }else{
       const toast = this.toastCtrl.create({
         message:'Akun anda sudah terdaftar!',
-        duration:500
+        duration:1000
       });
       (await toast).present();
     }

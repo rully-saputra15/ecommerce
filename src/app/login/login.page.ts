@@ -1,8 +1,10 @@
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { Router } from '@angular/router';
 import { UserService } from './../user.service';
 import { RestApiService } from './../rest-api.service';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +14,9 @@ import { Component, OnInit } from '@angular/core';
 export class LoginPage implements OnInit {
   email : string ;
   password : string;
-  constructor(public loadingCtrl: LoadingController,public restApi : RestApiService,public user : UserService,public router : Router,public toastCtrl : ToastController) { }
+  constructor(public loadingCtrl: LoadingController,public restApi : RestApiService,
+    public user : UserService,public router : Router,public toastCtrl : ToastController,
+    public storage: Storage) { }
 
   ngOnInit() {
   }
@@ -28,7 +32,10 @@ export class LoginPage implements OnInit {
     await this.restApi.login(data)
     .subscribe(res => {
       if(res[0]['message'] === 'success'){
-        this.user.setDataUser(res[0]['id'],res[0]['nama'],res[0]['alamat'],res[0]['status']);
+        //this.user.setDataUser(res[0]['id'],res[0]['nama'],res[0]['alamat'],res[0]['status']);
+        this.storage.set('nama', res[0]['nama']);
+        this.storage.set('status', res[0]['status']);
+        this.storage.set('id',res[0]['id']);
         loading.dismiss();
         this.router.navigate(['./home']);
       }

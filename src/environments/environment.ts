@@ -5,13 +5,14 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: 'AIzaSyA4GuOL9YdnBWy72BjspaI5ngqJ4WD4ZHE',
-    authDomain: 'bazaar-dki2.firebaseapp.com',
-    databaseURL: 'https://bazaar-dki2.firebaseio.com',
-    projectId: 'bazaar-dki2',
-    storageBucket: 'bazaar-dki2.appspot.com',
-    messagingSenderId: '313874928365',
-    appId: '1:313874928365:web:af4ca8dc8cb7fc26'
+    apiKey: 'AIzaSyA7L2yfeyuqedkQpC60LmKSLX7LlO7Hm4o',
+    authDomain: 'ecommerce-57e6c.firebaseapp.com',
+    databaseURL: 'https://ecommerce-57e6c.firebaseio.com',
+    projectId: 'ecommerce-57e6c',
+    storageBucket: 'ecommerce-57e6c.appspot.com',
+    messagingSenderId: '1025189189259',
+    appId: '1:1025189189259:web:76ab88783859a659cee68e',
+    measurementId: 'G-3BR7VPGMKS'
   }
 };
 

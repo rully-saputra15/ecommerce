@@ -12,16 +12,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { OneSignal } from '@ionic-native/onesignal/ngx';
+import { IonicStorageModule } from '@ionic/storage';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,AngularFirestoreModule,
-    AngularFireModule.initializeApp(environment.firebase),HttpClientModule],
+    AngularFireModule.initializeApp(environment.firebase),HttpClientModule,IonicStorageModule.forRoot()],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    { provide: FirestoreSettingsToken, useValue: {}}
+    { provide: FirestoreSettingsToken, useValue: {}},
+    OneSignal
   ],
   bootstrap: [AppComponent]
 })
