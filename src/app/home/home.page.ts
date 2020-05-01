@@ -36,12 +36,22 @@ export class HomePage implements OnInit{
 
   ngOnInit(){
     this.jumlah_keranjang = this.keranjangSvc.countKeranjang();
-    this.storage.get('status').then((val) => {
-      this.data['status'] = val;
+    this.storage.get('id').then((val)=>{
+      let tmp = {};
+      tmp['IDUser'] = val;
+      this.restApi.getStatusUser(tmp)
+      .subscribe(res =>{
+          this.storage.set('status',res[0]['status']);
+          this.storage.get('status').then((val) => {
+            this.data['status'] = val;
+            if(this.barangLoaded.length <= 0){
+              this.presentLoading();
+            }
+          });
+      },err =>{
+
+      });
     });
-    if(this.barangLoaded.length <= 0){
-      this.presentLoading();
-    }
   }
   ionViewWillEnter(){
     this.jumlah_keranjang = this.keranjangSvc.countKeranjang();

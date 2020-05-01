@@ -47,10 +47,13 @@ export class PembayaranPage implements OnInit {
     this.storage.get('id').then((val)=>{
       data['IDUser'] = val
     });
+    this.storage.get('status').then((val)=>{
+      data['StatusUser'] = val;
+    })
     data['JenisPembayaran'] = this.item;
     data['TotalHarga'] = this.totalHarga;
     this.presentInsertTransaksi(data);
-    console.log(data['IDUser']);
+    console.log(data);
   }
   async presentInsertTransaksi(data : any){
     var i ;

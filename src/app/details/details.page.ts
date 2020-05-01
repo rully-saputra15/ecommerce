@@ -1,3 +1,4 @@
+import { Storage } from '@ionic/storage';
 import { UserService } from './../user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Barang } from '../barang.model';
@@ -18,7 +19,7 @@ export class DetailsPage implements OnInit {
   nilai : number = 1;
   id : number ;
   constructor(public keranjangSvc : KeranjangService,public loadingCtrl : LoadingController,public restApi : RestApiService, public route : ActivatedRoute,public router : Router
-    ,public toastCtrl : ToastController,public userSvc : UserService) { }
+    ,public toastCtrl : ToastController,public userSvc : UserService,public storage: Storage) { }
 
   ngOnInit() {
     this.id = +this.route.snapshot.paramMap.get('id');
@@ -34,14 +35,15 @@ export class DetailsPage implements OnInit {
     loading.dismiss();*/
     let data = {};
     data['id'] = this.route.snapshot.paramMap.get('id');
-    data['status'] = this.userSvc.getDataStatus();
-    console.log(data);
-    await this.restApi.getBarang(data)
-    .subscribe(res => {
-      this.barang = res;
-      loading.dismiss();
-    }, err => {
-      loading.dismiss();
+    this.storage.get('status').then((val)=>{
+      data['status'] = val;
+      this.restApi.getBarang(data)
+      .subscribe(res => {
+        this.barang = res;
+        loading.dismiss();
+      }, err => {
+        loading.dismiss();
+      });
     });
   }
   async presentToast(){

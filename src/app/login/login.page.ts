@@ -19,6 +19,11 @@ export class LoginPage implements OnInit {
     public storage: Storage) { }
 
   ngOnInit() {
+    this.storage.get('id').then((val)=>{
+      if(val !== null){
+        this.router.navigate(['./home'])
+      }
+    });
   }
 
   async login(){

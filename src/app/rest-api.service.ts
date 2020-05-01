@@ -8,9 +8,10 @@ import { take } from 'rxjs/operators'
 const apiUrlReadBarangID = "http://localhost/quimtafari/api/product/read_barang.php";
 const apiUrlTransaksi = "http://localhost/quimtafari/api/product/addTransaksi.php";
 const apiUrlDetailTransaksi = "http://localhost/quimtafari/api/product/addDetailTransaksi.php";
-const apiUrlLogin = "http://localhost/quimtafari/api/product/login.php";*/
+const apiUrlLogin = "http://localhost/quimtafari/api/product/login.php";
 const apiUrlReadTransaksi = "http://localhost/quimtafari/api/product/readAllTransaksi.php";
-//const apiUrlRegister = "http://localhost/quimtafari/api/product/register.php";
+const apiUrlRegister = "http://localhost/quimtafari/api/product/register.php";
+const apiUrlStatusUser = "http://localhost/quimtafari/api/product/statusUser.php";*/
 
 const apiUrl = 'https://adminecommerce.000webhostapp.com/api/product/read_all_barang.php';
 const apiUrlReadBarangID = 'https://adminecommerce.000webhostapp.com/api/product/read_barang.php';
@@ -18,7 +19,8 @@ const apiUrlTransaksi = 'https://adminecommerce.000webhostapp.com/api/product/ad
 const apiUrlDetailTransaksi = 'https://adminecommerce.000webhostapp.com/api/product/addDetailTransaksi.php';
 const apiUrlLogin = "https://adminecommerce.000webhostapp.com/api/product/login.php";
 const apiUrlRegister = "https://adminecommerce.000webhostapp.com/api/product/register.php";
-//const apiUrlReadTransaksi = "https://adminecommerce.000webhostapp.com/api/product/readAllTransaksi.php";
+const apiUrlReadTransaksi = "https://adminecommerce.000webhostapp.com/api/product/readAllTransaksi.php";
+const apiUrlStatusUser = "https://adminecommerce.000webhostapp.com/api/product/statusUser.php";
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
@@ -53,6 +55,13 @@ export class RestApiService {
       retry(2),
       map(this.extractData),
       catchError(this.handleError));
+  }
+  getStatusUser(data : any):Observable<any>{
+    return this.http.post(apiUrlStatusUser,JSON.stringify(data)).pipe(
+      retry(2),
+      map(this.extractData),
+      catchError(this.handleError)
+    );
   }
   setAllBarang(data : any){
     this.barang = data;
