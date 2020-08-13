@@ -27,11 +27,7 @@ export class ListViewPage implements OnInit {
     await loading.present();
     this.barangLoaded = this.restApi.getAllBarangLocal();
     this.barang = this.barangLoaded;
-<<<<<<< HEAD
-    await loading.dismiss();
-=======
     loading.dismiss();
->>>>>>> 1c750a712dfae85249c252c4b67701cbe7611676
   }
   ionViewWillLeave(){
     this.barang = [];
