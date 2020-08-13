@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap, map, retry } from 'rxjs/operators';
+
 import { take } from 'rxjs/operators'
 /*const apiUrl = "http://localhost/quimtafari/api/product/read_all_barang.php";
 const apiUrlReadBarangID = "http://localhost/quimtafari/api/product/read_barang.php";
