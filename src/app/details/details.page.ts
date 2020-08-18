@@ -49,16 +49,11 @@ export class DetailsPage implements OnInit {
   async presentToast(){
     const toast = await this.toastCtrl.create({
       message: 'Sukses ditambah ke keranjang!',
-      duration: 2000
+      duration: 500
     });
     toast.present();
   }
-  async loadingKeranjang(){
-    const loading = await this.loadingCtrl.create({
-      message : 'Menambah barang ke keranjang!',
-      duration : 1000
-    });
-    loading.present();
+  async addToCart(){
     this.keranjangSvc.setKeranjang(this.id,this.barang[0]['nama_barang'],this.barang[0]['harga_pokok'],this.nilai);
     this.presentToast();
   }

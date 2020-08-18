@@ -4,9 +4,6 @@
       <ion-back-button color="light" defaultHref="home"></ion-back-button>
     </ion-buttons>
     <ion-searchbar (ionChange)="search($event)"></ion-searchbar>
-    <ion-item lines="none" slot="end" color="secondary">
-      <ion-icon name="notifications-outline"></ion-icon>
-    </ion-item>
     <ion-item lines="none" (click)="keranjang()"slot="end" color="secondary">
       <ion-icon style="font-size:2em;"name="checkmark"></ion-icon>
     </ion-item>
@@ -18,7 +15,7 @@
   <ion-item *ngFor="let tmp of barang; index as i" lines="full">
     <ion-label>
       <h2>{{tmp.nama_barang}}</h2>
-      <p>Harga : {{tmp.harga_pokok}}/{{tmp.satuan}}</p>
+      <p>Harga : {{tmp.harga_pokok |currency:"Rp ":"symbol":"3.0"}}/{{tmp.satuan}}</p>
   </ion-label>
       <!--<ion-row>
         <ion-col class="ion-float-left" size="9">
@@ -40,10 +37,10 @@
     
   </ion-item>
   </ion-list>
-  <!--<ion-infinite-scroll (ionInfinite)="loadData($event)">
+  <ion-infinite-scroll (ionInfinite)="loadData($event)">
     <ion-infinite-scroll-content
     loadingSpinner="circles"
     loadingText="Loading more data..." >
   </ion-infinite-scroll-content>
-  </ion-infinite-scroll>-->
+  </ion-infinite-scroll>
 </ion-content>

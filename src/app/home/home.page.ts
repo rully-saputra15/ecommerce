@@ -1,7 +1,7 @@
 import { KeranjangService } from './../keranjang.service';
 import { UserService } from './../user.service';
 import { Router } from '@angular/router';
-import { LoadingController, IonInfiniteScroll, AlertController, ToastController } from '@ionic/angular';
+import { LoadingController, IonInfiniteScroll, AlertController, ToastController, Platform } from '@ionic/angular';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { RestApiService } from '../rest-api.service';
 import { empty } from 'rxjs';
@@ -30,9 +30,16 @@ export class HomePage implements OnInit{
     'YASUHO'
   ];
   data = {};
-  constructor(public restApi : RestApiService,public loadingCtrl : LoadingController, public router : Router,
-    public userSvc : UserService,public keranjangSvc : KeranjangService,public storage : Storage,public alertCtrl : AlertController,
-    public toastCtrl : ToastController) {}
+  backSubscription ;
+  constructor(public restApi: RestApiService,
+              public loadingCtrl: LoadingController,
+              public router: Router,
+              public userSvc: UserService,
+              public keranjangSvc: KeranjangService,
+              public storage: Storage,
+              public alertCtrl: AlertController,
+              public toastCtrl: ToastController,
+              public platform: Platform) {}
 
   ngOnInit(){
     this.jumlah_keranjang = this.keranjangSvc.countKeranjang();
@@ -52,15 +59,24 @@ export class HomePage implements OnInit{
 
       });
     });
+    this.disableBackPage();
   }
   ionViewWillEnter(){
     this.jumlah_keranjang = this.keranjangSvc.countKeranjang();
-    if(this.visited == 1){
+    if(this.visited === 1){
       if(this.barangLoaded.length <= 0){
         this.presentLoading();
         this.visited = 0;
       }
     }
+  }
+  disableBackPage(){
+    this.backSubscription = this.platform.backButton.subscribeWithPriority(9999,() => {
+
+    });
+  }
+  ionViewWillLeave(){
+   this.backSubscription.unsubscribe();
   }
   async logout(){
     const alert = await this.alertCtrl.create({

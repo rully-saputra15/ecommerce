@@ -5,14 +5,14 @@
     </ion-buttons>
 
     <ion-searchbar></ion-searchbar>
-    <ion-item
+    <!--<ion-item
       lines="none"
       slot="end"
       color="secondary"
       class="ion-no-padding ion-no-margin"
     >
       <ion-icon name="share" color="light"></ion-icon>
-    </ion-item>
+    </ion-item>-->
   </ion-toolbar>
 </ion-header>
 
@@ -57,7 +57,7 @@
       <ion-col size="12" style="height: fit-content;">
         <ion-item lines="full">
           <h3 style="color: #FEC002;margin:0px">
-            <b>Rp.{{tmp.harga_pokok}}</b>
+            <b>{{tmp.harga_pokok |currency:"Rp ":"symbol":"3.0"}}</b>
           </h3>
         </ion-item>
       </ion-col>
@@ -206,7 +206,7 @@
             style="font-size: x-small;"
             color="warning"
             shape="block"
-            (click)="loadingKeranjang()"
+            (click)="addToCart()"
             >Tambah Ke keranjang</ion-button
           ></ion-col
         >

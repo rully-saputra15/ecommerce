@@ -5,23 +5,23 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { catchError, tap, map, retry } from 'rxjs/operators';
 
 import { take } from 'rxjs/operators'
-/*const apiUrl = "http://localhost/quimtafari/api/product/read_all_barang.php";
+const apiUrl = "http://localhost/quimtafari/api/product/read_all_barang.php";
 const apiUrlReadBarangID = "http://localhost/quimtafari/api/product/read_barang.php";
 const apiUrlTransaksi = "http://localhost/quimtafari/api/product/addTransaksi.php";
 const apiUrlDetailTransaksi = "http://localhost/quimtafari/api/product/addDetailTransaksi.php";
 const apiUrlLogin = "http://localhost/quimtafari/api/product/login.php";
 const apiUrlReadTransaksi = "http://localhost/quimtafari/api/product/readAllTransaksi.php";
 const apiUrlRegister = "http://localhost/quimtafari/api/product/register.php";
-const apiUrlStatusUser = "http://localhost/quimtafari/api/product/statusUser.php";*/
+const apiUrlStatusUser = "http://localhost/quimtafari/api/product/statusUser.php";
 
-const apiUrl = 'https://adminecommerce.000webhostapp.com/api/product/read_all_barang.php';
+/*const apiUrl = 'https://adminecommerce.000webhostapp.com/api/product/read_all_barang.php';
 const apiUrlReadBarangID = 'https://adminecommerce.000webhostapp.com/api/product/read_barang.php';
 const apiUrlTransaksi = 'https://adminecommerce.000webhostapp.com/api/product/addTransaksi.php';
 const apiUrlDetailTransaksi = 'https://adminecommerce.000webhostapp.com/api/product/addDetailTransaksi.php';
 const apiUrlLogin = "https://adminecommerce.000webhostapp.com/api/product/login.php";
 const apiUrlRegister = "https://adminecommerce.000webhostapp.com/api/product/register.php";
 const apiUrlReadTransaksi = "https://adminecommerce.000webhostapp.com/api/product/readAllTransaksi.php";
-const apiUrlStatusUser = "https://adminecommerce.000webhostapp.com/api/product/statusUser.php";
+const apiUrlStatusUser = "https://adminecommerce.000webhostapp.com/api/product/statusUser.php";*/
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
@@ -68,7 +68,11 @@ export class RestApiService {
     this.barang = data;
   }
   getAllBarangLocal(){
-    return this.barang;
+    if(this.barang.length > 0){
+      return this.barang;
+    } else {
+      return false;
+    }
   }
   postTransaksi(data : any):Observable<any>{
     return this.http.post(apiUrlTransaksi,JSON.stringify(data))

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { KeranjangService } from './../keranjang.service';
 import { RestApiService } from './../rest-api.service';
 import { Component, OnInit } from '@angular/core';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-list-view',
@@ -13,11 +14,14 @@ export class ListViewPage implements OnInit {
   barang : any = [];
   barangLoaded : any = [];
   i : number = 50;
-  constructor(public restApi : RestApiService,public keranjangSvc : KeranjangService,public router : Router,public toastCtrl : ToastController
-    ,public loadingCtrl : LoadingController) { }
+  constructor(public restApi: RestApiService,
+              public keranjangSvc: KeranjangService,
+              public router: Router,
+              public toastCtrl: ToastController,
+              public loadingCtrl: LoadingController,
+              public storage: Storage) { }
 
   ngOnInit() {
-    
     this.presentLoading();
   }
   async presentLoading(){
@@ -26,25 +30,39 @@ export class ListViewPage implements OnInit {
     });
     await loading.present();
     this.barangLoaded = this.restApi.getAllBarangLocal();
-    this.barang = this.barangLoaded;
+    if(this.barangLoaded === false){
+      this.storage.get('status').then(val => {
+        let data = {
+          status : val
+        };
+        this.restApi.getAllBarang(data)
+        .subscribe(res => {
+          this.barangLoaded = res;
+          this.barang = res.splice(0,this.i);
+        })
+      });
+    } else {
+      this.barang = this.barangLoaded.splice(0,this.i);
+    }
     loading.dismiss();
   }
   ionViewWillLeave(){
     this.barang = [];
     this.barangLoaded = [];
   }
-  /*loadData(event){
+  loadData(event){
     setTimeout(()=>{
-      this.barang = this.barangLoaded.splice(0,this.i+50);
+      let tmp = this.i + 50;
+      for(let i = this.i ; i < tmp ; i++){
+        this.barang.push(this.barangLoaded[i]);
+      }
       this.i = this.i + 50;
-      console.log(this.i);
       event.target.complete();
-
-      if(this.barang.length >= 1849){
+      if(this.barang.length >= this.barangLoaded.length){
         event.target.disabled = true;
       }
     },500);
-  }*/
+  }
   async tambahKeranjang(index){
     const toast = this.toastCtrl.create({
       message : 'Sukses menambah ke keranjang!',
@@ -53,18 +71,15 @@ export class ListViewPage implements OnInit {
     this.keranjangSvc.setKeranjang(this.barang[index]['id'],this.barang[index]['nama_barang'],this.barang[index]['harga_pokok'],1);
     (await toast).present();
   }
-  
-  keranjang(){
+
+  keranjang() {
     this.router.navigate(['./keranjang']);
   }
   search(ev : CustomEvent){
     const val = ev.detail.value;
-    console.log(val);
     if(val === ''){
       this.i = 50;
-      console.log(this.i);
       this.barang = this.barangLoaded.splice(0,this.i);
-      console.log(this.barang);
     } else {
     this.barang = this.barangLoaded.filter(barang => {
         // tslint:disable-next-line: no-unused-expression
