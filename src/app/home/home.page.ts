@@ -21,12 +21,13 @@ export class HomePage implements OnInit{
   status : number ;
   i : number = 25;
   visited : number ;
+  selectedMerk;
   merk = [
+    'All',
     '- A -',
     'CRUN',
     'CKD',
     'KOMACHI',
-    'CKD',
     'YASUHO'
   ];
   data = {};
@@ -42,24 +43,27 @@ export class HomePage implements OnInit{
               public platform: Platform) {}
 
   ngOnInit(){
-    this.jumlah_keranjang = this.keranjangSvc.countKeranjang();
-    this.storage.get('id').then((val)=>{
-      let tmp = {};
-      tmp['IDUser'] = val;
-      this.restApi.getStatusUser(tmp)
-      .subscribe(res =>{
-          this.storage.set('status',res[0]['status']);
-          this.storage.get('status').then((val) => {
-            this.data['status'] = val;
-            if(this.barangLoaded.length <= 0){
-              this.presentLoading();
-            }
-          });
-      },err =>{
-
-      });
-    });
     this.disableBackPage();
+    this.jumlah_keranjang = this.keranjangSvc.countKeranjang();
+    if(this.storage.get('id')){
+      this.storage.get('id').then((val)=>{
+        let tmp = {};
+        tmp['IDUser'] = val;
+        this.restApi.getStatusUser(tmp)
+        .subscribe(res =>{
+            this.storage.set('status',res[0]['status']);
+            this.storage.get('status').then((val) => {
+              this.data['status'] = val;
+              if(this.barangLoaded.length <= 0){
+                this.presentLoading();
+              }
+            });
+        }, err => {
+        });
+      });
+    } else {
+      this.router.navigate(['./login']);
+    }
   }
   ionViewWillEnter(){
     this.jumlah_keranjang = this.keranjangSvc.countKeranjang();
@@ -106,6 +110,9 @@ export class HomePage implements OnInit{
       message : 'Loading!'
     });
     await loading.present();
+    this.getAllBarang(loading);
+  }
+  async getAllBarang(loading){
     if(this.data['status'] == null){
       loading.dismiss();
       this.visited = 1;
@@ -114,40 +121,54 @@ export class HomePage implements OnInit{
       await this.restApi.getAllBarang(this.data)
       .subscribe(res => {
         this.barangLoaded = res;
-        this.barang = this.barangLoaded.slice(0,this.i);
+        this.initBarang();
         this.restApi.setAllBarang(this.barangLoaded);
         loading.dismiss();
       }, err => {
         loading.dismiss();
       });
     }
-
   }
+  
   keranjang(){
     this.router.navigate(['./keranjang']);
   }
   listView(){
     this.router.navigate(['./list-view']);
   }
-  setFilteredBarang(ev : CustomEvent){
-    this.barang = this.barangLoaded;
+  async setFilteredBarang(ev : CustomEvent){
     const val = ev.detail.value;
-    this.barang = this.barangLoaded.filter(barang => {
+    console.log(val);
+    if(val === ''){
+      this.initBarang();
+    } else {
+      this.barang = this.barangLoaded.filter(barang => {
         // tslint:disable-next-line: no-unused-expression
         return barang.nama_barang.toLowerCase().indexOf(val.toLowerCase()) > -1;
     });
+    }
+  }
+  clearSearchBar(ev){
+    ev.target.value = '';
+    this.initBarang();
   }
   setMerk(ev : CustomEvent){
-    this.barang = this.barangLoaded;
     const val = ev.detail.value;
-    this.barang = this.barangLoaded.filter(barang => {
-      return barang.merk.toLowerCase().indexOf(val.toLowerCase()) > -1;
-    });
+    if(val === 'All'){
+      this.initBarang();
+    } else {
+      this.barang = this.barangLoaded.filter(barang => {
+        return barang.merk.toLowerCase().indexOf(val.toLowerCase()) > -1;
+      });
+    }
   }
   loadData(event){
     setTimeout(()=>{
-      this.barang = this.barangLoaded.slice(0,this.i+25);
-      this.i = this.i + 25;
+      let tmp = this.i + 50;
+      for(let i = this.i ; i < tmp ; i++){
+        this.barang.push(this.barangLoaded[i]);
+      }
+      this.i = this.i + 50;
 
       event.target.complete();
 
@@ -165,5 +186,33 @@ export class HomePage implements OnInit{
       duration:1000
     });
     toast.present();
+  }
+  doRefresh(ev){
+    setTimeout(async () => {
+      if(this.data['status'] == null){
+        this.visited = 1;
+        this.router.navigate(['./login']);
+      }else{
+        await this.restApi.getAllBarang(this.data)
+        .subscribe(res => {
+          this.barangLoaded = res;
+          this.initBarang();
+          this.restApi.setAllBarang(this.barangLoaded);
+        }, err => {
+        });
+      }
+      ev.target.complete();
+    },1000)
+  }
+  clearFilter(){
+    this.initBarang();
+    //this.selectedMerk = '';
+  }
+  initBarang(){
+    this.barang = [];
+    for(let i = 0 ; i < this.i ; i++){
+      this.barang.push(this.barangLoaded[i]);
+    }
+    this.i = 25;
   }
 }

@@ -38,11 +38,11 @@ export class ListViewPage implements OnInit {
         this.restApi.getAllBarang(data)
         .subscribe(res => {
           this.barangLoaded = res;
-          this.barang = res.splice(0,this.i);
+          this.initBarang();
         })
       });
     } else {
-      this.barang = this.barangLoaded.splice(0,this.i);
+      this.initBarang();
     }
     loading.dismiss();
   }
@@ -78,13 +78,20 @@ export class ListViewPage implements OnInit {
   search(ev : CustomEvent){
     const val = ev.detail.value;
     if(val === ''){
-      this.i = 50;
-      this.barang = this.barangLoaded.splice(0,this.i);
+      this.initBarang();
     } else {
     this.barang = this.barangLoaded.filter(barang => {
         // tslint:disable-next-line: no-unused-expression
         return barang.nama_barang.toLowerCase().indexOf(val.toLowerCase()) > -1;
     });
   }
+  }
+
+  initBarang(){
+    this.barang = [];
+    for(let i = 0 ; i < this.i ; i++){
+      this.barang.push(this.barangLoaded[i]);
+    }
+    this.i = 25;
   }
 }

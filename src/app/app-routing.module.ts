@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes, NoPreloading } from '@angular/router';
-import { redirectUnauthorizedTo, canActivate } from '@angular/fire/auth-guard';
-const redirectUnauthorizedToLanding = redirectUnauthorizedTo(['home']);
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)},

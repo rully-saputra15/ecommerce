@@ -1,8 +1,8 @@
-<ion-header style="height: 107px;">
+<ion-header>
   <ion-toolbar color="secondary" >
      
     <ion-searchbar
-    (ionChange)="setFilteredBarang($event)">
+    (ionChange)="setFilteredBarang($event)" (ionClear)="clearSearchBar($event)">
     </ion-searchbar>
 
     <ion-item lines="none" slot="end" color="secondary">
@@ -36,7 +36,7 @@
    fill="outline"
    size="large"
    shape="round">
-   <ion-select (ionChange)="setMerk($event)" placeholder="Merk" style="margin-top: 4px; ">
+   <ion-select (ionChange)="setMerk($event)" placeholder="Merk" style="margin-top: 4px; "[(ngModel)]="selectedMerk">
      <ion-select-option *ngFor="let tmp of merk" value="{{tmp}}">{{tmp}}</ion-select-option>
    </ion-select>
    </ion-button>
@@ -51,15 +51,27 @@
    <h6 style="font-size: small; padding-bottom: 6px;opacity: 60%;">List View</h6>
   </ion-button
   >
+  <!--<ion-button 
+  expand="block"
+ color="secondary"
+ fill="outline"
+ size="large"
+ shape="round" 
+ (click)="clearFilter()">
+  <h6 style="font-size: small; padding-bottom: 6px;opacity: 60%;">Hapus Filter</h6>
+ </ion-button> -->
   </ion-buttons>
 
   
 
 </ion-header>
 
-<ion-content>
-  <ion-grid >
-    <ion-row >
+<ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-grid>
+    <!--<ion-row >
       <ion-slides pager="true">
         <ion-slide>
           <ion-card class="ion-no-padding ion-no-margin">
@@ -80,13 +92,16 @@
           </ion-card>
         </ion-slide>
       </ion-slides>
-    </ion-row>
+    </ion-row>-->
 
     <ion-row>
       <ion-col size="6" *ngFor="let tmp of barang" routerLink='/details/{{tmp.id}}'>
         <ion-card class="ion-no-padding ion-no-margin">
           <ion-card-header class="padding_3">
-            <img style="padding-bottom: 8px;" src="../../assets/sepatu.png" />
+            <ion-thumbnail class="img-card">
+              <img *ngIf="!tmp.foto"style="padding-bottom: 8px; background-size: cover;"src="../../assets/placeholder.jpg" />
+              <img *ngIf="tmp.foto"style="padding-bottom: 8px; background-size: cover;height:200px;" src={{restApi.urlPhoto}}{{tmp.foto}} />
+            </ion-thumbnail>
             <ion-card-subtitle class="ion-text-center">
              <strong style="font-size: medium;">{{tmp.nama_barang}}</strong> 
             </ion-card-subtitle>
@@ -115,7 +130,7 @@
         <ion-badge color="danger">{{jumlah_keranjang}}</ion-badge>
         <ion-icon name="cart" color="light"></ion-icon>
       </ion-tab-button>
-      <ion-tab-button>
+      <ion-tab-button routerLink="./home">
         <ion-label>Home</ion-label>
         <ion-icon name="calendar" color="light"></ion-icon>
       </ion-tab-button>

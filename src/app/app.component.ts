@@ -1,5 +1,4 @@
 import { environment } from './../environments/environment';
-import { FCM } from '@ionic-native/fcm/ngx';
 import { Component } from '@angular/core';
 
 import { Platform, AlertController } from '@ionic/angular';
@@ -18,7 +17,7 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private router:Router,
-    private oneSignal : OneSignal,
+    //private oneSignal : OneSignal,
     private alertCtrl : AlertController
   ) {
     this.initializeApp();
@@ -29,11 +28,11 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       if(this.platform.is('cordova')){
-        this.setupPush();
+        //this.setupPush();
       }
     });
   }
-    setupPush(){
+    /*setupPush(){
       this.oneSignal.startInit('4d37db28-33d0-4500-a788-24290f136619',environment.firebase.appId);
       this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.None);
 

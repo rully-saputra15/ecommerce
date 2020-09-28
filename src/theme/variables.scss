@@ -2,6 +2,7 @@
 // http://ionicframework.com/docs/theming/
 
 /** Ionic CSS Variables **/
+@import '../theme/font.scss';
 :root {
   /** primary **/
   --ion-color-primary: #3880ff;
@@ -10,7 +11,7 @@
   --ion-color-primary-contrast-rgb: 255, 255, 255;
   --ion-color-primary-shade: #3171e0;
   --ion-color-primary-tint: #4c8dff;
-
+  --ion-font-family: 'Baloo Tamma 2', cursive;
   /** secondary **/
   --ion-color-secondary: #2A7882;
   --ion-color-secondary-rgb: 42, 120, 130;

@@ -1,3 +1,4 @@
+import { AlertController } from '@ionic/angular';
 import { Barang } from './barang.model';
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
@@ -5,23 +6,32 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { catchError, tap, map, retry } from 'rxjs/operators';
 
 import { take } from 'rxjs/operators'
-const apiUrl = "http://localhost/quimtafari/api/product/read_all_barang.php";
+/*const apiUrl = "http://localhost/quimtafari/api/product/read_all_barang.php";
 const apiUrlReadBarangID = "http://localhost/quimtafari/api/product/read_barang.php";
 const apiUrlTransaksi = "http://localhost/quimtafari/api/product/addTransaksi.php";
 const apiUrlDetailTransaksi = "http://localhost/quimtafari/api/product/addDetailTransaksi.php";
 const apiUrlLogin = "http://localhost/quimtafari/api/product/login.php";
 const apiUrlReadTransaksi = "http://localhost/quimtafari/api/product/readAllTransaksi.php";
 const apiUrlRegister = "http://localhost/quimtafari/api/product/register.php";
-const apiUrlStatusUser = "http://localhost/quimtafari/api/product/statusUser.php";
+const apiUrlStatusUser = "http://localhost/quimtafari/api/product/statusUser.php";*/
 
-/*const apiUrl = 'https://adminecommerce.000webhostapp.com/api/product/read_all_barang.php';
-const apiUrlReadBarangID = 'https://adminecommerce.000webhostapp.com/api/product/read_barang.php';
-const apiUrlTransaksi = 'https://adminecommerce.000webhostapp.com/api/product/addTransaksi.php';
-const apiUrlDetailTransaksi = 'https://adminecommerce.000webhostapp.com/api/product/addDetailTransaksi.php';
-const apiUrlLogin = "https://adminecommerce.000webhostapp.com/api/product/login.php";
-const apiUrlRegister = "https://adminecommerce.000webhostapp.com/api/product/register.php";
-const apiUrlReadTransaksi = "https://adminecommerce.000webhostapp.com/api/product/readAllTransaksi.php";
-const apiUrlStatusUser = "https://adminecommerce.000webhostapp.com/api/product/statusUser.php";*/
+const apiUrl = "http://192.168.1.8/quimtafari/api/product/read_all_barang.php";
+const apiUrlReadBarangID = "http://192.168.1.8/quimtafari/api/product/read_barang.php";
+const apiUrlTransaksi = "http://192.168.1.8/quimtafari/api/product/add_transaksi.php";
+const apiUrlDetailTransaksi = "http://192.168.1.8/quimtafari/api/product/add_detail_transaksi.php";
+const apiUrlLogin = "http://192.168.1.8/quimtafari/api/product/login.php";
+const apiUrlReadTransaksi = "http://192.168.1.8/quimtafari/api/product/read_all_transaksi.php";
+const apiUrlRegister = "http://192.168.1.8/quimtafari/api/product/register.php";
+const apiUrlStatusUser = "http://192.168.1.8/quimtafari/api/product/status_user.php";
+
+/*const apiUrl = 'http://adminecommerce.online/api/product/read_all_barang.php';
+const apiUrlReadBarangID = 'http://adminecommerce.online/api/product/read_barang.php';
+const apiUrlTransaksi = 'http://adminecommerce.online/api/product/add_transaksi.php';
+const apiUrlDetailTransaksi = 'http://adminecommerce.online/api/product/add_detail_transaksi.php';
+const apiUrlLogin = "http://adminecommerce.online/api/product/login.php";
+const apiUrlRegister = "http://adminecommerce.online/api/product/register.php";
+const apiUrlReadTransaksi = "http://adminecommerce.online/api/product/read_all_transaksi.php";
+const apiUrlStatusUser = "http://adminecommerce.online/api/product/status_user.php";*/
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
@@ -32,7 +42,10 @@ const httpOptions = {
 })
 export class RestApiService {
   barang : any = [];
-  constructor(private http: HttpClient) { 
+  //public urlPhoto = "http://localhost/quimtafari/public/uploads/";
+  public urlPhoto = "http://192.168.1.8/quimtafari/public/uploads/";
+  //public urlPhoto = "http://adminecommerce.online/public/uploads/";
+  constructor(private http: HttpClient,private alertCtrl: AlertController) { 
   }
   getAllBarang(data : any):Observable<any>{
     return this.http.post(apiUrl,JSON.stringify(data)).pipe(
@@ -114,14 +127,24 @@ export class RestApiService {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error.message);
+      
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
       console.error(
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error}`);
+      
     }
     // return an observable with a user-facing error message
     return throwError('Something bad happened; please try again later.');
+  }
+  async showAlert(error){
+    const alert = await this.alertCtrl.create({
+      header:'Error',
+      message:error,
+      buttons:['Oke']
+    });
+    alert.present();
   }
 }

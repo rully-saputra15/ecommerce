@@ -45,15 +45,14 @@ export class PembayaranPage implements OnInit {
   finish(){
     let data = {};
     this.storage.get('id').then((val)=>{
-      data['IDUser'] = val
+      data['IDUser'] = val;
     });
     this.storage.get('status').then((val)=>{
       data['StatusUser'] = val;
-    })
+    });
     data['JenisPembayaran'] = this.item;
     data['TotalHarga'] = this.totalHarga;
     this.presentInsertTransaksi(data);
-    console.log(data);
   }
   async presentInsertTransaksi(data : any){
     var i ;
@@ -91,14 +90,14 @@ export class PembayaranPage implements OnInit {
     if(num == 1){
       const toast = await this.toastCtrl.create({
         message: 'Sukses menambah transaksi!',
-        duration: 2000
+        duration: 500
       });
       toast.present();
     }
     else{
       const toast = await this.toastCtrl.create({
         message: 'Gagal menambah transaksi!',
-        duration: 2000
+        duration: 500
       });
       toast.present();
     }

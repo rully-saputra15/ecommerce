@@ -4,7 +4,6 @@
       <ion-back-button color="light" defaultHref="home"></ion-back-button>
     </ion-buttons>
 
-    <ion-searchbar></ion-searchbar>
     <!--<ion-item
       lines="none"
       slot="end"
@@ -27,19 +26,22 @@
         </ion-fab>-->
         <ion-slide>
           <ion-card class="ion-no-padding ion-no-margin">
-            <img src="../../assets/sepatu.png" />
+            <img *ngIf="tmp.foto" style="height:300px;"src={{restApi.urlPhoto}}{{tmp.foto}} />
+            <img *ngIf="!tmp.foto" style="height:300px;"src="../../assets/placeholder.jpg"/>
+          </ion-card>
+        </ion-slide>
+        <!--<ion-slide>
+          <ion-card class="ion-no-padding ion-no-margin">
+            <img *ngIf="tmp.foto"src={{restApi.urlPhoto}}{{tmp.foto}} />
+            <img *ngIf="!tmp.foto" src="../../assets/placeholder.jpg"/>
           </ion-card>
         </ion-slide>
         <ion-slide>
           <ion-card class="ion-no-padding ion-no-margin">
-            <img src="../../assets/sepatu.png" />
+            <img *ngIf="tmp.foto"src={{restApi.urlPhoto}}{{tmp.foto}} />
+            <img *ngIf="!tmp.foto" src="../../assets/placeholder.jpg"/>
           </ion-card>
-        </ion-slide>
-        <ion-slide>
-          <ion-card class="ion-no-padding ion-no-margin">
-            <img src="../../assets/sepatu.png" />
-          </ion-card>
-        </ion-slide>
+        </ion-slide>-->
       </ion-slides>
     </ion-row>
   </ion-grid>
@@ -47,10 +49,10 @@
   <ion-grid >
     <ion-row>
       <ion-item lines="none">
-        <ion-col size="10" class="ion-no-padding">
+        <ion-col size="12" class="ion-no-padding">
           <h3><b>{{tmp.nama_barang}}</b></h3>
         </ion-col>
-        <ion-col size="2" class="ion-no-padding"> </ion-col>
+        <!--<ion-col size="2" class="ion-no-padding"> </ion-col>-->
       </ion-item>
     </ion-row>
     <ion-row>

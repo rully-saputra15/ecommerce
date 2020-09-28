@@ -2,7 +2,7 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { Router } from '@angular/router';
 import { UserService } from './../user.service';
 import { RestApiService } from './../rest-api.service';
-import { LoadingController, ToastController } from '@ionic/angular';
+import { LoadingController, ToastController, AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage';
 
@@ -16,7 +16,7 @@ export class LoginPage implements OnInit {
   password : string;
   constructor(public loadingCtrl: LoadingController,public restApi : RestApiService,
     public user : UserService,public router : Router,public toastCtrl : ToastController,
-    public storage: Storage) { }
+    public storage: Storage,public alertCtrl: AlertController) { }
 
   ngOnInit() {
     this.storage.get('id').then((val)=>{
@@ -46,6 +46,7 @@ export class LoginPage implements OnInit {
       }
     },err => {
       loading.dismiss();
+      //this.showAlert(err);
       this.presentToast();
     });
   }
@@ -55,6 +56,14 @@ export class LoginPage implements OnInit {
       duration: 500
     });
     toast.present();
+  }
+  async showAlert(error){
+    const alert = await this.alertCtrl.create({
+      header:'Error',
+      message:error,
+      buttons:['Oke']
+    });
+    alert.present();
   }
   register(){
     this.router.navigate(['./register']);
