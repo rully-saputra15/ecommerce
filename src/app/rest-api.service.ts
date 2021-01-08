@@ -15,23 +15,23 @@ const apiUrlReadTransaksi = "http://localhost/quimtafari/api/product/readAllTran
 const apiUrlRegister = "http://localhost/quimtafari/api/product/register.php";
 const apiUrlStatusUser = "http://localhost/quimtafari/api/product/statusUser.php";*/
 
-const apiUrl = "http://192.168.1.8/quimtafari/api/product/read_all_barang.php";
+/*const apiUrl = "http://192.168.1.8/quimtafari/api/product/read_all_barang.php";
 const apiUrlReadBarangID = "http://192.168.1.8/quimtafari/api/product/read_barang.php";
 const apiUrlTransaksi = "http://192.168.1.8/quimtafari/api/product/add_transaksi.php";
 const apiUrlDetailTransaksi = "http://192.168.1.8/quimtafari/api/product/add_detail_transaksi.php";
 const apiUrlLogin = "http://192.168.1.8/quimtafari/api/product/login.php";
 const apiUrlReadTransaksi = "http://192.168.1.8/quimtafari/api/product/read_all_transaksi.php";
 const apiUrlRegister = "http://192.168.1.8/quimtafari/api/product/register.php";
-const apiUrlStatusUser = "http://192.168.1.8/quimtafari/api/product/status_user.php";
+const apiUrlStatusUser = "http://192.168.1.8/quimtafari/api/product/status_user.php";*/
 
-/*const apiUrl = 'http://adminecommerce.online/api/product/read_all_barang.php';
+const apiUrl = 'http://adminecommerce.online/api/product/read_all_barang.php';
 const apiUrlReadBarangID = 'http://adminecommerce.online/api/product/read_barang.php';
 const apiUrlTransaksi = 'http://adminecommerce.online/api/product/add_transaksi.php';
 const apiUrlDetailTransaksi = 'http://adminecommerce.online/api/product/add_detail_transaksi.php';
 const apiUrlLogin = "http://adminecommerce.online/api/product/login.php";
 const apiUrlRegister = "http://adminecommerce.online/api/product/register.php";
 const apiUrlReadTransaksi = "http://adminecommerce.online/api/product/read_all_transaksi.php";
-const apiUrlStatusUser = "http://adminecommerce.online/api/product/status_user.php";*/
+const apiUrlStatusUser = "http://adminecommerce.online/api/product/status_user.php";
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
@@ -43,8 +43,8 @@ const httpOptions = {
 export class RestApiService {
   barang : any = [];
   //public urlPhoto = "http://localhost/quimtafari/public/uploads/";
-  public urlPhoto = "http://192.168.1.8/quimtafari/public/uploads/";
-  //public urlPhoto = "http://adminecommerce.online/public/uploads/";
+  //public urlPhoto = "http://192.168.1.8/quimtafari/public/uploads/";
+  public urlPhoto = "http://adminecommerce.online/public/uploads/";
   constructor(private http: HttpClient,private alertCtrl: AlertController) { 
   }
   getAllBarang(data : any):Observable<any>{

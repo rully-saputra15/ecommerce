@@ -36,6 +36,7 @@
     "cordova-android-support-gradle-release": "^3.0.1",
     "cordova-browser": "6.0.0",
     "cordova-ios": "^5.1.1",
+    "cordova-plugin-proguard": "^2.2.0",
     "cordova-res": "^0.13.1",
     "cordova-sqlite-storage": "^5.0.1",
     "core-js": "^2.5.4",
@@ -93,7 +94,8 @@
         "ANDROID_SUPPORT_VERSION": "24.+"
       },
       "onesignal-cordova-plugin": {},
-      "cordova-sqlite-storage": {}
+      "cordova-sqlite-storage": {},
+      "cordova-plugin-proguard": {}
     },
     "platforms": [
       "browser",
